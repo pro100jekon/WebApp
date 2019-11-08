@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee">
+    <tlib-version>1.0</tlib-version>
+    <short-name>ct</short-name>
+    <uri>/WEB-INF/tag/editItem</uri>
+    <tag>
+        <name>editItem</name>
+        <tag-class>com.epam.smyrnov.tag.EditItemTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>entity</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>
