@@ -20,7 +20,7 @@
                         </p>
                     </td>
                     <td>
-                        <input name="quantity${counter}" class="form-control" value="${item.value}">
+                        <input name="quantity${counter}" class="form-control" value="${item.value}" type="number">
                     </td>
                     <td>
                         <p class="font-weight-bold">

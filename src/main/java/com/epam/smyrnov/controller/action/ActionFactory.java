@@ -11,7 +11,7 @@ public class ActionFactory {
 	private static Map<String, Action> container = new LinkedHashMap<>();
 
 	public static void init() {
-		container.put("GET/",                   new MainAction());
+		//container.put("GET/",                   new MainAction());
 		container.put("GET/main",               new MainAction());
 		container.put("POST/login",             new SignInAction());
 		container.put("GET/register",           new SignUpAction());
@@ -28,6 +28,8 @@ public class ActionFactory {
 		container.put("POST/updateOrder",       new UpdateOrderAction());
 		container.put("GET/addToCartAjax",      new AddToCartAjax());
 		container.put("POST/registerOrder",     new RegisterOrderAction());
+		container.put("GET/sort",               new SortAction());
+		container.put("GET/showByCriteria",     new ShowByCriteriaAction());
 	}
 
 	public static Action getAction(HttpServletRequest request) {

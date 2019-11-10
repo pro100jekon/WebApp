@@ -3,7 +3,7 @@ package com.epam.smyrnov.controller.action.impl;
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
 import com.epam.smyrnov.entity.user.User;
-import com.epam.smyrnov.security.HashingSha256;
+import com.epam.smyrnov.util.HashingSha256;
 import com.epam.smyrnov.service.UserService;
 
 import javax.servlet.ServletContext;

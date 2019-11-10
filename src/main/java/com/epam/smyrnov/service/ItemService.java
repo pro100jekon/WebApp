@@ -11,13 +11,13 @@ public interface ItemService {
 
 	List<Item> getItemsByCategory(String category);
 
-	List<Item> getItemsByColorFromOneCategory(String category, String color);
+	List<Item> getItemsByColor(List<Item> items, String color);
 
-	List<Item> getItemsByPriceRangeFromOneCategory(String category, BigDecimal left, BigDecimal right);
-
-	List<Item> getItemsByWeightFromOneCategory(String category, int weight);
+	List<Item> getItemsByPriceRange(List<Item> items, BigDecimal left, BigDecimal right);
 
 	List<String> getAllCategories();
+
+	List<String> getAllColors();
 
 	Item getItemById(Long id);
 

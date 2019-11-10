@@ -10,8 +10,10 @@ import com.epam.smyrnov.constants.SQLQueries;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 @Service
@@ -31,23 +33,25 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Item> getItemsByColorFromOneCategory(String category, String color) {
-		return repository.findAllByColorFromOneCategory(category, color);
+	public List<Item> getItemsByColor(List<Item> items, String color) {
+		items.removeIf(item -> !item.getColor().toLowerCase().equals(color.toLowerCase()));
+		return items;
 	}
 
 	@Override
-	public List<Item> getItemsByPriceRangeFromOneCategory(String category, BigDecimal left, BigDecimal right) {
-		return repository.findAllByPriceRangeFromOneCategory(category, left, right);
-	}
-
-	@Override
-	public List<Item> getItemsByWeightFromOneCategory(String category, int weight) {
-		return repository.findAllByWeightFromOneCategory(category, weight);
+	public List<Item> getItemsByPriceRange(List<Item> items, BigDecimal left, BigDecimal right) {
+		items.removeIf(item -> !(item.getPrice().compareTo(left) >= 0 && item.getPrice().compareTo(right) <= 0));
+		return items;
 	}
 
 	@Override
 	public List<String> getAllCategories() {
 		return repository.getAllCategories();
+	}
+
+	@Override
+	public List<String> getAllColors() {
+		return repository.getAllColors();
 	}
 
 	@Override

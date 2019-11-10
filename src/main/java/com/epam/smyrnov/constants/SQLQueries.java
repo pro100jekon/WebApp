@@ -8,6 +8,7 @@ public final class SQLQueries {
         public static final String SELECT_IMAGES_OF_ITEM = "SELECT path FROM items, images WHERE items.id=? AND images.id=items.id";
         public static final String SELECT_ITEM_BY_ID = "SELECT * FROM items WHERE id=?";
         public static final String SELECT_CATEGORIES = "SELECT DISTINCT category FROM items";
+        public static final String SELECT_COLORS = "SELECT DISTINCT color FROM items";
 
         public static final String INSERT_ITEM = "INSERT INTO items VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
         public static final String INSERT_IMAGES = "INSERT INTO images VALUES(?, ?)";

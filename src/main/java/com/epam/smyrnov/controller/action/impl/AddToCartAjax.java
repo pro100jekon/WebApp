@@ -26,9 +26,12 @@ public class AddToCartAjax implements Action {
 				response.setCharacterEncoding("UTF-8");
 				StringBuilder stringBuilder = new StringBuilder();
 				stringBuilder.append("ajaxOutput/").append(item.getName()).append(" was added to cart. Check it out to change quantity if you want!%")
-						.append("<div><h6>Total price of cart: ")
-						.append(((Cart) session.getAttribute("cart")).getTotalPrice())
-						.append("</h6></div>");
+						//<a href="cart.jsp" class="btn btn-secondary">
+						//                        Cart: ${sessionScope.cart.totalPrice}
+						//                    </a>
+						.append("<a href=\"cart.jsp\" class=\"btn btn-secondary\">")
+						.append("Cart: ").append(((Cart) session.getAttribute("cart")).getTotalPrice())
+						.append(" UAH</a>");
 				return stringBuilder.toString();
 			} else {
 				request.setAttribute("message", "ERROR. There is no such item");

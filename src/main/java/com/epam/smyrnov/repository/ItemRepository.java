@@ -26,9 +26,5 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 
     List<String> getAllCategories();
 
-    List<Item> findAllByColorFromOneCategory(String category, String color);
-
-    List<Item> findAllByPriceRangeFromOneCategory(String category, BigDecimal left, BigDecimal right);
-
-    List<Item> findAllByWeightFromOneCategory(String category, int weight);
+    List<String> getAllColors();
 }

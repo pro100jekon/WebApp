@@ -4,7 +4,7 @@ import com.epam.smyrnov.annotation.Autowired;
 import com.epam.smyrnov.annotation.Service;
 import com.epam.smyrnov.entity.user.User;
 import com.epam.smyrnov.repository.UserRepository;
-import com.epam.smyrnov.security.HashingSha256;
+import com.epam.smyrnov.util.HashingSha256;
 import com.epam.smyrnov.service.UserService;
 import com.epam.smyrnov.entity.user.Role;
 

@@ -152,7 +152,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.setString(k++, entity.getName());
 			preparedStatement.setString(k++, entity.getSize());
 			preparedStatement.setInt(k++, entity.getWeight());
-			preparedStatement.setString(k++, entity.getColor());
+			preparedStatement.setString(k++, entity.getColor().toLowerCase());
 			preparedStatement.setBigDecimal(k++, entity.getPrice());
 			preparedStatement.setDate(k++, entity.getDate());
 			preparedStatement.setLong(k, entity.getId());
@@ -177,7 +177,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.setString(k++, entity.getName());
 			preparedStatement.setString(k++, entity.getSize());
 			preparedStatement.setInt(k++, entity.getWeight());
-			preparedStatement.setString(k++, entity.getColor());
+			preparedStatement.setString(k++, entity.getColor().toLowerCase());
 			preparedStatement.setBigDecimal(k++, entity.getPrice());
 			preparedStatement.setDate(k, entity.getDate());
 			insertImagesOfItemIntoDB(entity);
@@ -207,7 +207,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.SELECT_CATEGORIES)) {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				String s = resultSet.getString("category"); //laptop
+				String s = resultSet.getString("category").toLowerCase(); //laptop
 				char c = s.charAt(0); //l
 				String c1 = Character.toString(c).toUpperCase(Locale.getDefault()); //L
 				s = s.substring(1);
@@ -219,6 +219,27 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			throw new DataAccessException(e.getMessage(), e);
 		}
 		return categories;
+	}
+
+	@Override
+	public List<String> getAllColors() {
+		List<String> colors = new ArrayList<>();
+		try (Connection connection = getConnection();
+		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.SELECT_COLORS)) {
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String s = resultSet.getString("color").toLowerCase(); //blue
+				char c = s.charAt(0); //b
+				String c1 = Character.toString(c).toUpperCase(); //B
+				s = s.substring(1);
+				colors.add(c1 + s);
+			}
+			close(resultSet);
+		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		return colors;
 	}
 
 	@Override
@@ -248,42 +269,6 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
-	}
-
-	@Override
-	public List<Item> findAllByColorFromOneCategory(String category, String color) {
-		List<Item> items = findAllByCategory(category);
-		List<Item> itemList = new ArrayList<>();
-		for (Item item : items) {
-			if (item.getColor().equals(color)) {
-				itemList.add(item);
-			}
-		}
-		return itemList;
-	}
-
-	@Override
-	public List<Item> findAllByPriceRangeFromOneCategory(String category, BigDecimal left, BigDecimal right) {
-		List<Item> items = findAllByCategory(category);
-		List<Item> itemList = new ArrayList<>();
-		for (Item item : items) {
-			if (item.getPrice().compareTo(right) <= 0 && item.getPrice().compareTo(left) >= 0) {
-				itemList.add(item);
-			}
-		}
-		return itemList;
-	}
-
-	@Override
-	public List<Item> findAllByWeightFromOneCategory(String category, int weight) {
-		List<Item> items = findAllByCategory(category);
-		List<Item> itemList = new ArrayList<>();
-		for (Item item : items) {
-			if (item.getWeight() < weight) {
-				itemList.add(item);
-			}
-		}
-		return itemList;
 	}
 
 	private void setImagesForItem(Item item) {
