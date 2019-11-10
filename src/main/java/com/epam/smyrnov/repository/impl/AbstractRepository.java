@@ -9,59 +9,68 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class AbstractRepository {
 
-    private DataSource dataSource;
+	private DataSource dataSource;
 
-    private static final Logger logger = Logger.getLogger(AbstractRepository.class);
+	private static final Logger logger = Logger.getLogger(AbstractRepository.class);
 
-    protected AbstractRepository() {
-        try {
-            Context initContext = new InitialContext();
-            Context envContext = (Context) initContext.lookup("java:/comp/env");
-            dataSource = (DataSource) envContext.lookup("jdbc/web_app");
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-            logger.error(Constants.Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
-            throw new DataAccessException(Constants.Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
-        }
-    }
+	protected AbstractRepository() {
+		try {
+			Context initContext = new InitialContext();
+			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			dataSource = (DataSource) envContext.lookup("jdbc/web_app");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+			logger.error(Constants.Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
+		}
+	}
 
-    public Connection getConnection() {
-        Connection con = null;
-        try {//  "jdbc:mysql://localhost/web_app?user=user&password=asdf"
-            con = dataSource.getConnection();
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-            //con = DriverManager.getConnection("jdbc:mysql://localhost/web_app?user=user&password=asdf");
-        } catch (SQLException /*| ClassNotFoundException*/ ex) {
-            ex.printStackTrace();
-            logger.error(Constants.Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
-           throw new DataAccessException(Constants.Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
-        }
-        return con;
-    }
+	public Connection getConnection() {
+		Connection connection = null;
+		try {
+			connection = dataSource.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(Constants.Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
+		}
+		return connection;
+	}
 
-    protected static void close(ResultSet resultSet) {
-        try {
-            resultSet.close();
-        } catch (SQLException e) {
-            logger.error("Cannot close result set.");
-            throw new DataAccessException("Cannot close result set.");
-        }
-    }
+	protected static void close(ResultSet resultSet) {
+		try {
+			resultSet.close();
+		} catch (SQLException e) {
+			logger.error(Constants.Messages.ERR_CANNOT_CLOSE_RESULT_SET);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_CLOSE_RESULT_SET);
+		}
+	}
 
-    protected static void close(Connection connection) {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            logger.error("Cannot close connection.");
-            throw new DataAccessException("Cannot close connection.");
-        }
-    }
+	protected static void close(Connection connection) {
+		try {
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			logger.error(Constants.Messages.ERR_CANNOT_CLOSE_CONNECTION);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_CLOSE_CONNECTION);
+		}
+	}
+
+	protected static void rollback(Connection connection) {
+		try {
+			if (connection != null) {
+				connection.rollback();
+				close(connection);
+			}
+		} catch (SQLException e) {
+			logger.error(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION);
+		}
+	}
 }

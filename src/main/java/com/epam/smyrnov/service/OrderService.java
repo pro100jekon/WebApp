@@ -11,8 +11,6 @@ public interface OrderService {
 
 	List<Order> getOrdersByUserId(Long id);
 
-	List<Order> getOrdersByItemId(Long id);
-
 	List<Order> addOrders(List<Order> orders);
 
 	Order getOrderById(Long id);
@@ -20,4 +18,6 @@ public interface OrderService {
 	Order addOrder(Order order);
 
 	Order updateOrder(Order order);
+
+	Long getLastId();
 }

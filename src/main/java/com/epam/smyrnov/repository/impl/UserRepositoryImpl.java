@@ -194,8 +194,8 @@ public class UserRepositoryImpl extends AbstractRepository implements UserReposi
 
 	@Override
 	public User update(User entity) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Users.UPDATE_USER)) {
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Users.UPDATE_USER)) {
 			int k = 1;
 			preparedStatement.setString(k++, entity.getEmail());
 			preparedStatement.setString(k++, entity.getPassword());
@@ -205,8 +205,10 @@ public class UserRepositoryImpl extends AbstractRepository implements UserReposi
 			preparedStatement.setInt(k++, entity.getRole().ordinal());
 			preparedStatement.setLong(k, entity.getId());
 			preparedStatement.execute();
-			connection.commit(); //TODO commits
+			connection.commit();
+			close(connection);
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -215,19 +217,23 @@ public class UserRepositoryImpl extends AbstractRepository implements UserReposi
 
 	@Override
 	public User create(User entity) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Users.INSERT_USER)) {
-			int k = 1;
-			preparedStatement.setString(k++, entity.getEmail());
-			preparedStatement.setString(k++, entity.getPassword());
-			preparedStatement.setString(k++, entity.getFirstName());
-			preparedStatement.setString(k++, entity.getLastName());
-			preparedStatement.setBoolean(k++, entity.isBlocked());
-			preparedStatement.setInt(k, entity.getRole().ordinal());
-			preparedStatement.execute();
-		} catch (SQLException e) {
-			logger.error(e.getMessage(), e);
-			throw new DataAccessException(e.getMessage(), e);
+		if (!existsByEmail(entity.getEmail())) {
+			Connection connection = getConnection();
+			try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Users.INSERT_USER)) {
+				int k = 1;
+				preparedStatement.setString(k++, entity.getEmail());
+				preparedStatement.setString(k++, entity.getPassword());
+				preparedStatement.setString(k++, entity.getFirstName());
+				preparedStatement.setString(k++, entity.getLastName());
+				preparedStatement.setBoolean(k++, entity.isBlocked());
+				preparedStatement.setInt(k, entity.getRole().ordinal());
+				preparedStatement.execute();
+				connection.commit();
+			} catch (SQLException e) {
+				rollback(connection);
+				logger.error(e.getMessage(), e);
+				throw new DataAccessException(e.getMessage(), e);
+			}
 		}
 		return entity;
 	}

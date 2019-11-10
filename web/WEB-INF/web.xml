@@ -6,4 +6,6 @@
     <welcome-file-list>
         <welcome-file>main</welcome-file>
     </welcome-file-list>
+    <response-character-encoding>UTF-8</response-character-encoding>
+    <request-character-encoding>UTF-8</request-character-encoding>
 </web-app>

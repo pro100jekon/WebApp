@@ -22,7 +22,7 @@ public class AccountFilter implements Filter {
 		if (user != null) {
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
-			servletRequest.getRequestDispatcher(Constants.Pages.ERROR_PAGE).forward(servletRequest, servletResponse);
+			servletRequest.getRequestDispatcher(Constants.Pages.INFO_PAGE).forward(servletRequest, servletResponse);
 		}
 	}
 

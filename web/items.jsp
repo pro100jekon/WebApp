@@ -21,35 +21,6 @@
             </p>
         </div>
     </section>
-
-    <%--    <div class="album py-5 bg-light">--%>
-    <%--        <div class="container">--%>
-    <%--            <div class="row">--%>
-    <%--                <c:forEach var="i" items="${pageScope.orders}">--%>
-    <%--                    <div class="col-md-4">--%>
-    <%--                        <div class="card mb-4 box-shadow">--%>
-    <%--                            <div class="card-body">--%>
-    <%--                                <p class="card-text">--%>
-    <%--                                    Order id: ${i.id}<br>--%>
-    <%--                                    User: ${i.user.firstName} ${i.user.lastName}<br>--%>
-    <%--                                    Email: ${i.user.email}<br>--%>
-    <%--                                    Payment type: ${i.paymentType.value()}<br>--%>
-    <%--                                    Delivery type: ${i.deliveryType.value()}<br>--%>
-    <%--                                    Items:<br>--%>
-    <%--                                    <c:forEach var="item" items="${i.itemsAndQuantities}">--%>
-    <%--                                        ${item.key.name}<br>--%>
-    <%--                                    </c:forEach>--%>
-    <%--                                </p>--%>
-    <%--                                <div class="d-flex justify-content-between align-items-center">--%>
-    <%--                                    <small class="text-capitalize"><a href="orderEdit?orderId=${i.id}">Edit</a></small>--%>
-    <%--                                </div>--%>
-    <%--                            </div>--%>
-    <%--                        </div>--%>
-    <%--                    </div>--%>
-    <%--                </c:forEach>--%>
-    <%--            </div>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
     <l:adminElement element="${pageScope.items}"/>
 
 </main>

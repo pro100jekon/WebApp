@@ -145,8 +145,8 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 
 	@Override
 	public Item update(Item entity) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.UPDATE_ITEM)) {
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.UPDATE_ITEM)) {
 			int k = 1;
 			preparedStatement.setString(k++, entity.getCategory());
 			preparedStatement.setString(k++, entity.getName());
@@ -160,6 +160,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -168,8 +169,8 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 
 	@Override
 	public Item create(Item entity) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement =
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement =
 				     connection.prepareStatement(SQLQueries.Items.INSERT_ITEM)) {
 			int k = 1;
 			preparedStatement.setString(k++, entity.getCategory());
@@ -183,6 +184,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -202,9 +204,8 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	public List<String> getAllCategories() {
 		List<String> categories = new ArrayList<>();
 		try (Connection connection = getConnection();
-		     Statement statement = connection.createStatement()) {
-			statement.executeQuery(SQLQueries.Items.SELECT_CATEGORIES);
-			ResultSet resultSet = statement.getResultSet();
+		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.SELECT_CATEGORIES)) {
+			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String s = resultSet.getString("category"); //laptop
 				char c = s.charAt(0); //l
@@ -305,8 +306,8 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	}
 
 	private void insertImagesOfItemIntoDB(Item item) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.INSERT_IMAGES)) {
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.INSERT_IMAGES)) {
 			deleteImages(item);
 			for (Iterator<String> iterator = item.getImageURLs().iterator(); iterator.hasNext(); ) {
 				String url = iterator.next();
@@ -321,18 +322,20 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 				}
 			}
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
 	}
 
 	private void deleteImages(Item item) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.DELETE_IMAGES)) {
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.DELETE_IMAGES)) {
 			preparedStatement.setLong(1, item.getId());
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}

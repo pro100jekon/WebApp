@@ -37,7 +37,11 @@ public class MainController extends HttpServlet {
             response.getWriter().println(stringBuilder);
         } else if (view.contains("PRG")) {
                 String[] s = view.split("/");
-                response.sendRedirect(s[s.length - 1]);
+                if (request.getAttribute("message") != null) {
+                    response.sendRedirect(s[s.length - 1] + "?message=" + request.getAttribute("error"));
+                } else {
+                    response.sendRedirect(s[s.length - 1]);
+                }
         } else {
             request.getRequestDispatcher(view).forward(request, response);
         }

@@ -1,9 +1,9 @@
-
 <html>
 <head>
     <title>Error</title>
 </head>
 <body>
-${error}
+${param.message}
+${message}
 </body>
 </html>

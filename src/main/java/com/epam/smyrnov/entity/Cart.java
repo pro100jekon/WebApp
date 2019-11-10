@@ -10,12 +10,6 @@ import java.util.Map;
 public class Cart {
 
     private Map<Item, Integer> itemInCart = new HashMap<>();
-    /*{
-        ItemRepository itemRepository = new ItemRepositoryImpl();
-        itemInCart.put(itemRepository.findById(2L), 2);
-        itemInCart.put(itemRepository.findById(1L), 4);
-        itemInCart.put(itemRepository.findById(4L), 1);
-    }*/
 
     public Map<Item, Integer> getItemInCart() {
         return itemInCart;
@@ -25,12 +19,20 @@ public class Cart {
         itemInCart.put(item, quantity);
     }
 
+    public void put(Item item) {
+        itemInCart.put(item, 1);
+    }
+
     public BigDecimal getTotalPrice() {
         BigDecimal sum = new BigDecimal(0);
         for (Map.Entry<Item, Integer> entry : itemInCart.entrySet()) {
             sum = sum.add(getPriceOfOneItem(entry));
         }
         return sum;
+    }
+
+    public boolean isEmpty() {
+        return itemInCart.isEmpty();
     }
 
     public BigDecimal getPriceOfOneItem(Map.Entry<Item, Integer> entry) {

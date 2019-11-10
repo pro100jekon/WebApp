@@ -150,12 +150,7 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 			connection.commit();
 			return create(entity);
 		} catch (SQLException e) {
-			try {
-				connection.rollback();
-				close(connection);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -163,8 +158,8 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 
 	@Override
 	public Order create(Order entity) {
-		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.INSERT_ORDER)) {
+		Connection connection = getConnection();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.INSERT_ORDER)) {
 			preparedStatement.setLong(1, entity.getId());
 			preparedStatement.setLong(4, entity.getUser().getId());
 			preparedStatement.setInt(5, entity.getDeliveryType().ordinal());
@@ -178,6 +173,7 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 			}
 			return entity;
 		} catch (SQLException e) {
+			rollback(connection);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}

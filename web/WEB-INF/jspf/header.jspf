@@ -34,19 +34,17 @@
             </c:if>
             <li>
                 <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
+                    <a href="cart.jsp" class="btn btn-secondary">
                         Cart
-                    </button>
-                    <div class="dropdown-menu">
-                        <h6 class="dropdown-header">Total price is: ${sessionScope.cart.totalPrice}</h6>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="cart">See your cart</a>
-                    </div>
+                    </a>
                 </div>
+            </li>
+            <li id="totalPrice">
+                <div><h6>Total price of cart: ${sessionScope.cart.totalPrice}</h6></div>
             </li>
         </ul>
     </div>
+    <div style="text-align: center;" id="alert"></div>
     <c:choose>
         <c:when test="${sessionScope.user == null}">
             <div class="btn-group dropleft">
@@ -69,7 +67,7 @@
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                    <a class="dropdown-item" href="register">New around here? Sign up</a>
                 </div>
             </div>
         </c:when>

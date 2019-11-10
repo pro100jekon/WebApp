@@ -25,20 +25,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> getOrdersByItemId(Long id) {
-		return null;
-		//return orderRepository.findOrdersByItemId(id);
-	}
-
-	@Override
 	public List<Order> addOrders(List<Order> orders) {
 		return orderRepository.saveAll(orders);
 	}//TODO delete if not needed
 
 	@Override
 	public Order updateOrder(Order order) {
-		return null;
-		//return orderRepository.save(order, true);
+		return orderRepository.update(order);
 	}
 
 	@Override
@@ -48,6 +41,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order addOrder(Order order) {
-		return orderRepository.update(order);
+		return orderRepository.create(order);
+	}
+
+	@Override
+	public Long getLastId() {
+		return orderRepository.count() + 1;
 	}
 }

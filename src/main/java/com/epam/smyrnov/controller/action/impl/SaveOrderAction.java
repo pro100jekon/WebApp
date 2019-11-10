@@ -36,8 +36,9 @@ public class SaveOrderAction implements Action {
 				orderForSave.setUser(user);
 			}
 			if (sessionOrder.getStatus().equals(Status.CANCELLED) ||
-					(sessionOrder.getStatus().equals(Status.CONFIRMED) && status.equals(Status.REGISTERED))) { //cannot change cancelled orders AND cannot revert confirmed into registered
-				request.setAttribute("error", "Invalid state of order status to be changed");
+					(sessionOrder.getStatus().equals(Status.CONFIRMED) && status.equals(Status.REGISTERED)) ||
+					(sessionOrder.getStatus().equals(Status.REGISTERED) && status.equals(Status.REGISTERED))) { //cannot change cancelled orders AND cannot revert confirmed into registered
+				request.setAttribute("message", "ERROR. Invalid state of order status to be changed.");
 			} else {
 				orderForSave.setStatus(status);
 				orderForSave.setDeliveryType(deliveryType);
@@ -45,14 +46,16 @@ public class SaveOrderAction implements Action {
 				Map<Item, Integer> itemMap = (Map<Item, Integer>) session.getAttribute("itemMap");
 				if (itemMap != null) { // if map is not empty, it means it has at least one item and its quantity
 					orderForSave.setItemsAndQuantities(itemMap);
-					orderService.addOrder(orderForSave);
+					orderService.updateOrder(orderForSave);
+					request.setAttribute("info", "INFO");
+					return "PRG" + Constants.Pages.ALL_ORDERS_PAGE;
 				} else {
-					request.setAttribute("error", "Items are empty");
+					request.setAttribute("message", "ERROR. Items are empty.");
 				}
 			}
 		} else {
-			request.setAttribute("error", "There is no order to edit");
+			request.setAttribute("message", "ERROR. There is no order to edit.");
 		}
-		return Constants.Pages.ORDER_EDITOR_PAGE;
+		return Constants.Pages.INFO_PAGE;
 	}
 }

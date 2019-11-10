@@ -3,9 +3,7 @@ package com.epam.smyrnov.controller.action.impl;
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
 import com.epam.smyrnov.entity.Item;
-import com.epam.smyrnov.entity.order.Order;
 import com.epam.smyrnov.service.ItemService;
-import com.epam.smyrnov.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,13 +33,14 @@ public class EditOrderAjax implements Action {
 			if (item != null) {
 				itemMap.put(item, Integer.parseInt(quantity));
 			}
-			StringBuilder itemsOutput = new StringBuilder();
+			StringBuilder itemsOutput = new StringBuilder("<td colspan=\"2\"><div style=\"text-align: center;\">");
 			for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
-				itemsOutput.append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append("<br>");
+				itemsOutput.append("<h5>").append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append("</h5><br>");
 			}
+			itemsOutput.append("</div></td>");
 			return "ajaxOutput/" + itemsOutput;
 		}
-		request.setAttribute("error", "Something went wrong, try again");
-		return Constants.Pages.ORDER_EDITOR_PAGE;
+		request.setAttribute("message", "ERROR. Something went wrong, try again.");
+		return Constants.Pages.INFO_PAGE;
 	}
 }

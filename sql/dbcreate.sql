@@ -52,25 +52,43 @@ CREATE TABLE items (
 CREATE TABLE images (
     id BIGINT NOT NULL REFERENCES items(id)
         ON DELETE CASCADE,
-    path VARCHAR(100),
-    PRIMARY KEY (id, path)
+    path VARCHAR(100) NOT NULL PRIMARY KEY
 );
 
-INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Samsung galaxy S8', '68.1 x 148.9 x 8', 155, 'blue', 13000, DATE('2017-02-15'));
-INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Samsung galaxy S28', '68.1 x 148.9 x 8', 155, 'blue', 13000, DATE('2017-02-15'));
-INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Samsung galaxy S18', '68.1 x 148.9 x 8', 155, 'blue', 13000, DATE('2017-02-15'));
-INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'Xiaomi Ninebot Mini', '260 x 595 x 548', 12800, 'white', 10000, DATE('2016-10-01'));
-INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'MiniRobot Black HJ-2', '546 x 262 x 595', 7900, 'black', 10000, DATE('2016-10-01'));
-INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'Smart Balance Premium 10.5', '700 x 350 x 335', 5000, 'pink', 10000, DATE('2016-10-01'));
-INSERT INTO items VALUES (DEFAULT, 'laptop', 'Xiaomi Mi Notebook Air 13.3"', '309.6 x 14.8 x 210.9', 12800, 'gray', 10000, DATE('2018-09-24'));
-INSERT INTO items VALUES (DEFAULT, 'laptop', 'ASUS ZenBook 13 UX333FA-A3126T', '309.6 x 14.8 x 210.9', 12800, 'white', 10000, DATE('2018-09-24'));
-INSERT INTO items VALUES (DEFAULT, 'laptop', 'Lenovo IdeaPad S340-15IWL', '309.6 x 14.8 x 210.9', 12800, 'cyan', 10000, DATE('2018-09-24'));
-INSERT INTO images VALUES (1, 'C:\\SQL\\IMG\\Samsung1.jpg');
-INSERT INTO images VALUES (1, 'C:\\SQL\\IMG\\Samsung2.jpg');
-INSERT INTO images VALUES (1, 'C:\\SQL\\IMG\\Samsung3.jpg');
-INSERT INTO images VALUES (2, 'C:\\SQL\\IMG\\Xiaomi1.jpg');
-INSERT INTO images VALUES (2, 'C:\\SQL\\IMG\\Xiaomi2.jpg');
-INSERT INTO images VALUES (2, 'C:\\SQL\\IMG\\Xiaomi3.jpg');
+INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Samsung galaxy S8', '68.1 x 148.9 x 8', 155, 'Blue', 13000, DATE('2017-02-15'));
+INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Apple iPhone 11 Pro', '144 x 71.4 x 8.1', 188, 'Green', 35000, DATE('2019-09-20'));
+INSERT INTO items VALUES (DEFAULT, 'smartphone', 'Huawei P30 Pro', '158 x 73.4 x 8.4', 156, 'Blue', 28000, DATE('2019-03-26'));
+INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'Xiaomi Ninebot Mini', '260 x 595 x 548', 12800, 'White', 8400, DATE('2016-10-01'));
+INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'MiniRobot Black HJ-2', '546 x 262 x 595', 12800, 'Black', 7900, DATE('2017-12-06'));
+INSERT INTO items VALUES (DEFAULT, 'gyroboard', 'Smart Balance Premium 10.5', '700 x 350 x 335', 12000, 'Pink', 5000, DATE('2019-02-09'));
+INSERT INTO items VALUES (DEFAULT, 'laptop', 'Xiaomi Mi Notebook Air 13.3"', '309.6 x 14.8 x 210.9', 1280, 'Gray', 22000, DATE('2018-09-24'));
+INSERT INTO items VALUES (DEFAULT, 'laptop', 'ASUS ZenBook 13 UX333FA-A3126T', '309.6 x 14.8 x 210.9', 1090, 'White', 28000, DATE('2016-05-04'));
+INSERT INTO items VALUES (DEFAULT, 'laptop', 'Lenovo IdeaPad S340-15IWL', '309.6 x 14.8 x 210.9', 1800, 'Blue', 23250, DATE('2017-04-22'));
+INSERT INTO images VALUES (1, 'Samsung1.jpg');
+INSERT INTO images VALUES (1, 'Samsung2.jpg');
+INSERT INTO images VALUES (1, 'Samsung3.jpg');
+INSERT INTO images VALUES (2, 'iPhone1.jpg');
+INSERT INTO images VALUES (2, 'iPhone2.jpg');
+INSERT INTO images VALUES (2, 'iPhone3.jpg');
+INSERT INTO images VALUES (3, 'Huawei1.jpg');
+INSERT INTO images VALUES (3, 'Huawei2.jpg');
+INSERT INTO images VALUES (3, 'Huawei3.jpg');
+INSERT INTO images VALUES (4, 'XiaomiGyro1.jpg');
+INSERT INTO images VALUES (4, 'XiaomiGyro2.jpg');
+INSERT INTO images VALUES (4, 'XiaomiGyro3.jpg');
+INSERT INTO images VALUES (5, 'MinibotGyro1.jpg');
+INSERT INTO images VALUES (5, 'MinibotGyro2.jpg');
+INSERT INTO images VALUES (6, 'SmartBalanceGyro1.jpg');
+INSERT INTO images VALUES (6, 'SmartBalanceGyro2.jpg');
+INSERT INTO images VALUES (6, 'SmartBalanceGyro3.jpg');
+INSERT INTO images VALUES (7, 'XiaomiNotebook1.jpg');
+INSERT INTO images VALUES (7, 'XiaomiNotebook2.jpg');
+INSERT INTO images VALUES (7, 'XiaomiNotebook3.jpg');
+INSERT INTO images VALUES (8, 'ASUSNotebook1.jpg');
+INSERT INTO images VALUES (8, 'ASUSNotebook2.jpg');
+INSERT INTO images VALUES (8, 'ASUSNotebook3.jpg');
+INSERT INTO images VALUES (9, 'LenovoNotebook1.jpg');
+INSERT INTO images VALUES (9, 'LenovoNotebook2.jpg');
 
 CREATE TABLE statuses (
     id INT PRIMARY KEY,

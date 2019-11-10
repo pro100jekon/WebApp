@@ -20,6 +20,6 @@ public class EditItemAjax implements Action {
 			response.setCharacterEncoding("UTF-8");
 			item.getImageURLs().set(o, null);
 		}
-		return "ajaxOutput/<p>Press Save button to confirm changes after all done actions</p>";
+		return "ajaxOutput/<td colspan=\"2\"><div style=\"text-align: center;\"><p>Press Save button to confirm changes after all done actions</p></div></td>";
 	}
 }

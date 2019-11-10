@@ -4,8 +4,6 @@ import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.service.ItemService;
-import com.epam.smyrnov.service.UserService;
-import com.epam.smyrnov.util.ItemProcess;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class SaveItemAction implements Action {
 	@Override
@@ -28,11 +23,12 @@ public class SaveItemAction implements Action {
 		ItemService itemService = (ItemService) request.getServletContext().getAttribute("ItemService");
 		if (item != null) {
 			String id = request.getParameter("itemIdentifier");
-			Long identifier = Long.parseLong(id);
-			Item originalItem = itemService.getItemById(identifier);
-			if (!originalItem.getId().equals(identifier)) {
-				request.setAttribute("error", "Wrong item editing");
+			Long identifier = Long.parseLong(id); //1
+			Item originalItem = itemService.getItemById(identifier); //1
+			if (!identifier.equals(item.getId())) {
+				request.setAttribute("message", "ERROR. Wrong item editing.");
 			} else {
+				//////////////////////////////////////////////
 				String category = request.getParameter("category");
 				if (!"".equals(category)) {
 					originalItem.setCategory(category);
@@ -58,11 +54,8 @@ public class SaveItemAction implements Action {
 					BigDecimal price = new BigDecimal(strPrice);
 					originalItem.setPrice(price);
 				}
-				String year = request.getParameter("year");
-				String month = request.getParameter("month");
-				String day = request.getParameter("day");
-				if (!"".equals(year) && !"".equals(month) && !"".equals(day)) {
-					String date = year + "-" + month + "-" + day;
+				String date = request.getParameter("date");
+				if (!"".equals(date)) {
 					Date d = Date.valueOf(date);
 					originalItem.setDate(d);
 				}
@@ -71,12 +64,14 @@ public class SaveItemAction implements Action {
 					List<String> urls = new ArrayList<>(Arrays.asList(paths.split(";")));
 					originalItem.getImageURLs().addAll(urls);
 				}
-				//ItemProcess.setNotNullFields(item, originalItem);
+				//////////////////////////////////////////////
+				// above block of code checks non-empty fields and edits only them
 				itemService.updateItem(originalItem);
+				return Constants.Pages.ITEM_EDITOR_PAGE; // everything is ok
 			}
 		} else {
-			request.setAttribute("error", "Try editing item first, then save it");
+			request.setAttribute("message", "ERROR. Try editing item first, then save it.");
 		}
-		return Constants.Pages.ERROR_PAGE;
+		return Constants.Pages.INFO_PAGE;
 	}
 }
