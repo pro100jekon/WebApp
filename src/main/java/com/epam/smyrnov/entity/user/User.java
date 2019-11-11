@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class User extends Entity {
 
-    private static final long serialVersionUID = 0L;//TODO
+    private static final long serialVersionUID = 985472332498498456L;
     private String email;
     private String password;
     private String firstName;

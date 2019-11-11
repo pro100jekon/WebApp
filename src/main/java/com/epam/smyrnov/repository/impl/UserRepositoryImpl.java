@@ -19,6 +19,7 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl extends AbstractRepository implements UserRepository {
 
+	private static final long serialVersionUID = -5931541748654132164L;
 	private static final Logger logger = Logger.getLogger(ItemRepositoryImpl.class);
 
 	@Override
@@ -229,6 +230,7 @@ public class UserRepositoryImpl extends AbstractRepository implements UserReposi
 				preparedStatement.setInt(k, entity.getRole().ordinal());
 				preparedStatement.execute();
 				connection.commit();
+				close(connection);
 			} catch (SQLException e) {
 				rollback(connection);
 				logger.error(e.getMessage(), e);

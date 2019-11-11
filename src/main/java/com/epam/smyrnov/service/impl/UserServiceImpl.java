@@ -8,11 +8,13 @@ import com.epam.smyrnov.util.HashingSha256;
 import com.epam.smyrnov.service.UserService;
 import com.epam.smyrnov.entity.user.Role;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Serializable {
 
+    private static final long serialVersionUID = 4568764135134687987L;
     @Autowired
     public UserRepository repository;
 
@@ -53,7 +55,7 @@ public class UserServiceImpl implements UserService {
         return repository.update(user);
     }
 
-    @Override
+    /*@Override
     public boolean deleteUserById(Long id) {
         return repository.delete(id);
     }
@@ -61,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUserByEmail(String email) {
         return repository.deleteByEmail(email);
-    }
+    }*/
 
     @Override
     public User blockUser(User user) {

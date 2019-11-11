@@ -2,6 +2,7 @@ package com.epam.smyrnov.filter;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.entity.user.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,8 +12,12 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/account"})
 public class AccountFilter implements Filter {
+
+	private static final Logger logger = Logger.getLogger(AccountFilter.class);
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		logger.debug("AccountFilter was initialized");
 	}
 
 	@Override
@@ -28,5 +33,6 @@ public class AccountFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		logger.debug("AccountFilter was destroyed");
 	}
 }

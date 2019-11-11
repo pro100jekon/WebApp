@@ -25,6 +25,7 @@ import java.util.Map;
 @Repository
 public class OrderRepositoryImpl extends AbstractRepository implements OrderRepository {
 
+	private static final long serialVersionUID = 4561238946551654654L;
 	private static final Logger logger = Logger.getLogger(ItemRepositoryImpl.class);
 
 	@Override
@@ -148,6 +149,7 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 			preparedStatement.setLong(1, entity.getId());
 			preparedStatement.execute();
 			connection.commit();
+			close(connection);
 			return create(entity);
 		} catch (SQLException e) {
 			rollback(connection);
@@ -171,6 +173,7 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 				preparedStatement.execute();
 				connection.commit();
 			}
+			close(connection);
 			return entity;
 		} catch (SQLException e) {
 			rollback(connection);
@@ -227,12 +230,5 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
-	}
-
-	public static void main(String[] args) {
-		OrderRepository orderRepository = new OrderRepositoryImpl();
-		Order order = orderRepository.findById(1L);
-		order.setStatus(Status.CONFIRMED);
-		System.out.println(orderRepository.update(order));
 	}
 }

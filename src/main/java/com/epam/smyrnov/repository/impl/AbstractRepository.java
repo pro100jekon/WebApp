@@ -8,12 +8,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class AbstractRepository {
+public abstract class AbstractRepository implements Serializable {
 
+	private static final long serialVersionUID = 5145613218646545649L;
 	private DataSource dataSource;
 
 	private static final Logger logger = Logger.getLogger(AbstractRepository.class);

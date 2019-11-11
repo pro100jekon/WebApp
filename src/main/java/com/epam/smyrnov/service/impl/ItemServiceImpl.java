@@ -8,6 +8,7 @@ import com.epam.smyrnov.repository.impl.ItemRepositoryImpl;
 import com.epam.smyrnov.service.ItemService;
 import com.epam.smyrnov.constants.SQLQueries;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,8 +18,9 @@ import java.util.Locale;
 import java.util.Set;
 
 @Service
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl implements ItemService, Serializable {
 
+	private static final long serialVersionUID = -5641321654798745646L;
 	@Autowired
 	private	ItemRepository repository;
 
@@ -70,7 +72,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public boolean removeItem(Item item) {
-		return repository.delete(item.getId());
+	public boolean removeItemById(Long id) {
+		return repository.delete(id);
 	}
 }

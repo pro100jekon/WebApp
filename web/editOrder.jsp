@@ -60,6 +60,7 @@
                 </td>
                 <td>
                     <select class="custom-select" id="statusId" name="statusId">
+                        <option value="none">Remain the same</option>
                         <c:forEach items="${Status.values()}" var="type">
                             <option value="${type.ordinal()}">${type.value()}</option>
                         </c:forEach>
@@ -74,6 +75,7 @@
                 </td>
                 <td>
                     <select class="custom-select" id="deliveryTypeId" name="deliveryTypeId">
+                        <option value="none">Remain the same</option>
                         <c:forEach items="${DeliveryType.values()}" var="type">
                             <option value="${type.ordinal()}">${type.value()}</option>
                         </c:forEach>
@@ -87,6 +89,7 @@
                 </td>
                 <td>
                     <select class="custom-select" id="paymentTypeId"name="paymentTypeId">
+                        <option value="none">Remain the same</option>
                         <c:forEach items="${PaymentType.values()}" var="type">
                             <option value="${type.ordinal()}">${type.value()}</option>
                         </c:forEach>
@@ -98,11 +101,11 @@
                 <td>
                     <p class="font-weight-bold"><label for="itemId">Item id</label></p>
                 </td>
-                <td><input class="form-control" id="itemId" name="itemId"></td>
+                <td><input class="form-control" id="itemId" name="itemId" type="number"></td>
             </tr>
             <tr>
                 <td><p class="font-weight-bold"><label for="quantity">Quantity</label></p></td>
-                <td><input class="form-control" id="quantity" name="quantity"></td>
+                <td><input class="form-control" id="quantity" name="quantity" type="number"></td>
             </tr>
             <tr>
                 <td colspan="2"><a class="btn btn-primary btn-lg btn-block" id="submitItem" href="#">Add item into order</a></td>

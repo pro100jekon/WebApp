@@ -38,7 +38,8 @@ public class RegisterOrderAction implements Action {
 					orderService.addOrder(order);
 					session.removeAttribute("cart");
 					session.setAttribute("cart", new Cart());
-					return "PRG" + Constants.Pages.CART_PAGE;
+					request.setAttribute("message", "INFO. Order was successfully registered.");
+					return "PRG" + Constants.Pages.INFO_PAGE;
 				} else {
 					request.setAttribute("message", "ERROR. Wrong params. Try again.");
 				}

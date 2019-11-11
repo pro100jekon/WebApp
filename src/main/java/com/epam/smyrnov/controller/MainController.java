@@ -3,6 +3,7 @@ package com.epam.smyrnov.controller;
 import com.epam.smyrnov.controller.action.Action;
 import com.epam.smyrnov.controller.action.ActionFactory;
 import com.epam.smyrnov.entity.Cart;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,9 +16,12 @@ import java.io.IOException;
 @WebServlet(name = "/controller",
 urlPatterns = {"/"})
 public class MainController extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(MainController.class);
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getMethod() + request.getServletPath());
+        logger.debug(request.getMethod() + request.getServletPath());
         Action action = ActionFactory.getAction(request);
         String view = action.exec(request, response);
         HttpSession session = request.getSession();
@@ -38,7 +42,7 @@ public class MainController extends HttpServlet {
         } else if (view.contains("PRG")) {
                 String[] s = view.split("/");
                 if (request.getAttribute("message") != null) {
-                    response.sendRedirect(s[s.length - 1] + "?message=" + request.getAttribute("error"));
+                    response.sendRedirect(s[s.length - 1] + "?message=" + request.getAttribute("message"));
                 } else {
                     response.sendRedirect(s[s.length - 1]);
                 }

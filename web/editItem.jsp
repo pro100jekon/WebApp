@@ -83,17 +83,17 @@
                 <td><p class="font-weight-bold">Size</p></td>
                 <td>
                     <div class="form-row">
-                        <div class="col-2"><input class="form-control" id="size1" name="size1" size="2"></div>
+                        <div class="col-2"><input class="form-control" id="size1" name="size1" size="2" type="number"></div>
                         x
-                        <div class="col-2"><input class="form-control" id="size2" name="size2" size="2"></div>
+                        <div class="col-2"><input class="form-control" id="size2" name="size2" size="2" type="number"></div>
                         x
-                        <div class="col-2"><input class="form-control" id="size3" name="size3" size="2"></div>
+                        <div class="col-2"><input class="form-control" id="size3" name="size3" size="2" type="number"></div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td><p class="font-weight-bold"><label for="weight">Weight</label></p></td>
-                <td><input class="form-control" id="weight" name="weight"></td>
+                <td><input class="form-control" id="weight" name="weight" type="number"></td>
             </tr>
             <tr>
                 <td><p class="font-weight-bold"><label for="color">Color</label></p></td>
@@ -101,7 +101,7 @@
             </tr>
             <tr>
                 <td><p class="font-weight-bold"><label for="price">Price</label></p></td>
-                <td><input class="form-control" id="price" name="price"></td>
+                <td><input class="form-control" id="price" name="price" type="number"></td>
             </tr>
             <tr>
                 <td><p class="font-weight-bold"><label for="date">Date</label></p></td>

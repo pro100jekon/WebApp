@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Order extends Entity {
 
-    private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = -6546521314864798646L;
     private User user;
     private Map<Item, Integer> itemsAndQuantities;
     private DeliveryType deliveryType;

@@ -25,8 +25,8 @@ public class EditOrderAjax implements Action {
 		response.setCharacterEncoding("UTF-8");
 		String itemId = request.getParameter("itemId");
 		String quantity = request.getParameter("quantity");
-		if (itemId == null || quantity == null) {
-			response.getWriter().println("Incorrect info");
+		if (itemId == null || quantity == null || Integer.parseInt(itemId) < 1 || Integer.parseInt(quantity) < 1) {
+			request.setAttribute("message", "ERROR. Wrong info. Try again.");
 		} else {
 			ItemService itemService = (ItemService) request.getServletContext().getAttribute("ItemService");
 			Item item = itemService.getItemById(Long.parseLong(itemId));
@@ -40,7 +40,6 @@ public class EditOrderAjax implements Action {
 			itemsOutput.append("</div></td>");
 			return "ajaxOutput/" + itemsOutput;
 		}
-		request.setAttribute("message", "ERROR. Something went wrong, try again.");
 		return Constants.Pages.INFO_PAGE;
 	}
 }

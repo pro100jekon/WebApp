@@ -7,6 +7,7 @@ public final class SQLQueries {
         public static final String SELECT_ALL_ITEMS_BY_CATEGORY = "SELECT * FROM items WHERE category=? ORDER BY id";
         public static final String SELECT_IMAGES_OF_ITEM = "SELECT path FROM items, images WHERE items.id=? AND images.id=items.id";
         public static final String SELECT_ITEM_BY_ID = "SELECT * FROM items WHERE id=?";
+        public static final String SELECT_ITEM_BY_NAME = "SELECT * FROM items WHERE name=?";
         public static final String SELECT_CATEGORIES = "SELECT DISTINCT category FROM items";
         public static final String SELECT_COLORS = "SELECT DISTINCT color FROM items";
 

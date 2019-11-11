@@ -27,18 +27,21 @@
                                 ${item.key.price * item.value} UAH
                         </p>
                     </td>
+                    <td>
+                        <a href="deleteItemFromCart?id=${item.key.id}">Delete</a>
+                    </td>
                 </tr>
                 <c:set value="${counter + 1}" var="counter"/>
             </c:forEach>
             <tr>
-                <td colspan="3"><input class="btn btn-primary btn-lg btn-block" type="submit" value="Update"></td>
+                <td colspan="4"><input class="btn btn-primary btn-lg btn-block" type="submit" value="Update"></td>
             </tr>
         </form>
 
         <c:choose>
             <c:when test="${user == null or cart.isEmpty()}">
                 <tr>
-                    <td colspan="3"><input class="btn btn-primary btn-lg btn-block disabled" type="submit"
+                    <td colspan="4"><input class="btn btn-primary btn-lg btn-block disabled" type="submit"
                                            value="Save the order"></td>
                 </tr>
             </c:when>
@@ -48,7 +51,7 @@
                         <td>
                             <label for="deliveryType">Delivery type</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <select id="deliveryType" name="deliveryType" class="form-control">
                                 <c:forEach var="deliveryType" items="${DeliveryType.values()}">
                                     <option value="${deliveryType.ordinal()}">${deliveryType.value()}</option>
@@ -60,7 +63,7 @@
                         <td>
                             <label for="paymentType">Payment type</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <select name="paymentType" id="paymentType" class="form-control">
                                 <c:forEach var="paymentType" items="${PaymentType.values()}">
                                     <option value="${paymentType.ordinal()}">${paymentType.value()}</option>
@@ -69,7 +72,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
+                        <td colspan="4">
                             <input class="btn btn-primary btn-lg btn-block" type="submit" value="Save the order">
                         </td>
                     </tr>

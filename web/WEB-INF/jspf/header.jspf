@@ -1,7 +1,6 @@
 <%@ page import="com.epam.smyrnov.entity.user.Role" %>
-<c:set var="categories" value="${applicationScope.ItemService.allCategories}"/>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="main">Shop name</a>
+    <a class="navbar-brand" href="main">EMAN</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,17 +8,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Categories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <c:forEach var="category" items="${categories}">
-                        <a class="dropdown-item" href="main?category=${category.toLowerCase()}">${category}</a>
-                    </c:forEach>
-                </div>
-            </li>
             <c:if test="${sessionScope.user.role == Role.ADMIN}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"

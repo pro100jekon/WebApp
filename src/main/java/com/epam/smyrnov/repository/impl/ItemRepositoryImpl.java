@@ -22,6 +22,7 @@ import java.util.Locale;
 @Repository
 public class ItemRepositoryImpl extends AbstractRepository implements ItemRepository {
 
+	private static final long serialVersionUID = -5956124129875167245L;
 	private static final Logger logger = Logger.getLogger(ItemRepositoryImpl.class);
 
 	@Override
@@ -46,13 +47,17 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	@Override
 	public boolean delete(Long id) {
 		if (existsById(id)) {
-			try (Connection connection = getConnection();
-			     PreparedStatement preparedStatement =
+			Connection connection = getConnection();
+			try (PreparedStatement preparedStatement =
 					     connection.prepareStatement(SQLQueries.Items.DELETE_ITEM_BY_ID)) {
 				preparedStatement.setLong(1, id);
 				preparedStatement.execute();
+				connection.commit();
+				close(connection);
+				deleteImages(id);
 				return true;
 			} catch (SQLException e) {
+				rollback(connection);
 				logger.error(e.getMessage(), e);
 				throw new DataAccessException(e.getMessage(), e);
 			}
@@ -180,11 +185,22 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.setString(k++, entity.getColor().toLowerCase());
 			preparedStatement.setBigDecimal(k++, entity.getPrice());
 			preparedStatement.setDate(k, entity.getDate());
-			insertImagesOfItemIntoDB(entity);
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
 			rollback(connection);
+			logger.error(e.getMessage(), e);
+			throw new DataAccessException(e.getMessage(), e);
+		}
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.SELECT_ITEM_BY_NAME)) {
+			preparedStatement.setString(1, entity.getName());
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				entity.setId(resultSet.getLong("id"));
+			}
+			insertImagesOfItemIntoDB(entity);
+			close(resultSet);
+		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -293,7 +309,9 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	private void insertImagesOfItemIntoDB(Item item) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.INSERT_IMAGES)) {
-			deleteImages(item);
+			if (item.getId() != null) {
+				deleteImages(item.getId());
+			}
 			for (Iterator<String> iterator = item.getImageURLs().iterator(); iterator.hasNext(); ) {
 				String url = iterator.next();
 				if (url != null) {
@@ -302,6 +320,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 					preparedStatement.setString(k, url);
 					preparedStatement.execute();
 					connection.commit();
+					close(connection);
 				} else {
 					iterator.remove();
 				}
@@ -313,12 +332,13 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 		}
 	}
 
-	private void deleteImages(Item item) {
+	private void deleteImages(Long id) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.DELETE_IMAGES)) {
-			preparedStatement.setLong(1, item.getId());
+			preparedStatement.setLong(1, id);
 			preparedStatement.execute();
 			connection.commit();
+			connection.close();
 		} catch (SQLException e) {
 			rollback(connection);
 			logger.error(e.getMessage(), e);

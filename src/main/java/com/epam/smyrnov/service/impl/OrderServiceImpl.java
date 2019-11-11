@@ -6,11 +6,13 @@ import com.epam.smyrnov.entity.order.Order;
 import com.epam.smyrnov.repository.OrderRepository;
 import com.epam.smyrnov.service.OrderService;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService, Serializable {
 
+	private static final long serialVersionUID = -6545646156749866472L;
 	@Autowired
 	private OrderRepository orderRepository;
 
