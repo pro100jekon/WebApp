@@ -27,7 +27,8 @@ public class SignInAction implements Action {
                 UserService userService = (UserService) servletContext.getAttribute("UserService");
                 password = HashingSha256.hash(password);
                 User user = userService.getUserByEmail(email);
-                if (!password.equals(user.getPassword())) {
+                System.out.println(HashingSha256.hash("111111"));
+                if (user == null || !password.equals(user.getPassword())) {
                     request.setAttribute("message", "ERROR. There is no user with such email and password.");
                 } else {
                     session.setAttribute("user", user);

@@ -13,6 +13,6 @@ public class ValidateItem {
 		boolean hasNegativeSize = item.getSize().contains("-");
 		boolean hasNegativeWeight = item.getWeight() < 0;
 		boolean hasNegativePrice = item.getPrice().compareTo(BigDecimal.ZERO) < 0;
-		return hasNegativeSize && hasNegativeWeight && hasNegativePrice;
+		return !(hasNegativeSize && hasNegativeWeight && hasNegativePrice);
 	}
 }

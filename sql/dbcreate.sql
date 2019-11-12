@@ -18,6 +18,7 @@ CREATE TABLE users (
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
     blocked BOOLEAN NOT NULL,
+    verified BOOLEAN NOT NULL,
     role_id INTEGER NOT NULL REFERENCES roles(id)
        ON DELETE CASCADE
        ON UPDATE RESTRICT
@@ -34,9 +35,14 @@ END;//
 DELIMITER ;
 
 -- password = admin.
-INSERT INTO users VALUES (0, 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin', 'Adminbl4', FALSE, 0);
+INSERT INTO users VALUES (0, 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Almighty', 'Admin', FALSE, TRUE, 0);
 -- password = password.
-INSERT INTO users VALUES (0, 'client@gmail.com', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Speed', 'Wagon', FALSE, 1);
+INSERT INTO users VALUES (0, 'client@gmail.com', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Useless', 'Client', FALSE, TRUE, 1);
+
+CREATE TABLE hashes (
+    id BIGINT NOT NULL REFERENCES users(id),
+    hash VARCHAR(100) NOT NULL PRIMARY KEY
+);
 
 CREATE TABLE items (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -162,6 +168,6 @@ CREATE TABLE orders (
     status_id INT NOT NULL REFERENCES statuses(id)
 );
 
-INSERT INTO orders VALUES (1, 1, 2, 2, 1, 1, 0);
-INSERT INTO orders VALUES (1, 4, 23, 2, 1, 1, 0);
-INSERT INTO orders VALUES (1, 2, 11, 2, 1, 1, 0);
+INSERT INTO orders VALUES (1, 1, 2, 2, 4, 1, 0);
+INSERT INTO orders VALUES (1, 4, 23, 2, 4, 1, 0);
+INSERT INTO orders VALUES (1, 2, 11, 2, 4, 1, 0);

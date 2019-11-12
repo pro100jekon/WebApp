@@ -10,8 +10,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public abstract class AbstractRepository implements Serializable {
 
@@ -64,15 +66,26 @@ public abstract class AbstractRepository implements Serializable {
 		}
 	}
 
-	protected static void rollback(Connection connection) {
+	protected static void close(Statement statement) {
+		try {
+			if (statement != null) {
+				statement.close();
+			}
+		} catch (SQLException e) {
+			logger.error(Constants.Messages.ERR_CANNOT_CLOSE_STATEMENT);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_CLOSE_STATEMENT);
+		}
+	}
+
+	protected static void rollback(Connection connection, Throwable t) {
 		try {
 			if (connection != null) {
 				connection.rollback();
 				close(connection);
 			}
 		} catch (SQLException e) {
-			logger.error(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION);
-			throw new DataAccessException(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION);
+			logger.error(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION, t);
+			throw new DataAccessException(Constants.Messages.ERR_CANNOT_ROLLBACK_CONNECTION, t);
 		}
 	}
 }

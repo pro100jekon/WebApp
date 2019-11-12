@@ -39,7 +39,7 @@
         </form>
 
         <c:choose>
-            <c:when test="${user == null or cart.isEmpty()}">
+            <c:when test="${user == null or cart.isEmpty() or !user.verified}">
                 <tr>
                     <td colspan="4"><input class="btn btn-primary btn-lg btn-block disabled" type="submit"
                                            value="Save the order"></td>

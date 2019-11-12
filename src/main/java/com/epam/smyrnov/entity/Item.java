@@ -103,6 +103,20 @@ public class Item extends Entity {
 
     @Override
     public String toString() {
+        return "Item{" +
+                "category='" + category + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", date=" + date +
+                ", size='" + size + '\'' +
+                ", color='" + color + '\'' +
+                ", weight=" + weight +
+                ", imageURLs=" + imageURLs +
+                ", id=" + id +
+                '}';
+    }
+
+    public String toHtml() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Id: ").append(id).append("<br>");
         stringBuilder.append("Category: ").append(category).append("<br>");
@@ -111,7 +125,10 @@ public class Item extends Entity {
         stringBuilder.append("Weight: ").append(weight).append("<br>");
         stringBuilder.append("Color: ").append(color).append("<br>");
         stringBuilder.append("Date of addition: ").append(date).append("<br>");
-        stringBuilder.append("Image URLs: ").append(imageURLs).append("<br>");
+        stringBuilder.append("Image URLs:<br>");
+        for (String url: imageURLs) {
+            stringBuilder.append(url).append("<br>");
+        }
         return stringBuilder.toString();
     }
 }

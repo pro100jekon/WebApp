@@ -3,17 +3,14 @@ package com.epam.smyrnov.repository.impl;
 import com.epam.smyrnov.annotation.Repository;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.exception.DataAccessException;
-import com.epam.smyrnov.exception.NoSuchElementException;
 import com.epam.smyrnov.repository.ItemRepository;
 import com.epam.smyrnov.constants.SQLQueries;
 import org.apache.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,15 +23,14 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	private static final Logger logger = Logger.getLogger(ItemRepositoryImpl.class);
 
 	@Override
-	public long count() {
+	public long getLastId() {
 		long counter = 0;
 		try (Connection connection = getConnection();
 		     PreparedStatement preparedStatement =
-				     connection.prepareStatement(SQLQueries.Items.SELECT_ALL_ITEMS)) {
-			preparedStatement.execute();
-			ResultSet resultSet = preparedStatement.getResultSet();
-			while (resultSet.next()) {
-				counter++;
+				     connection.prepareStatement(SQLQueries.Items.GET_LAST_ID)) {
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				counter = resultSet.getLong("id");
 			}
 			close(resultSet);
 		} catch (SQLException e) {
@@ -50,20 +46,22 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			Connection connection = getConnection();
 			try (PreparedStatement preparedStatement =
 					     connection.prepareStatement(SQLQueries.Items.DELETE_ITEM_BY_ID)) {
+				connection.setAutoCommit(false);
 				preparedStatement.setLong(1, id);
 				preparedStatement.execute();
 				connection.commit();
-				close(connection);
 				deleteImages(id);
 				return true;
 			} catch (SQLException e) {
-				rollback(connection);
+				rollback(connection, e);
 				logger.error(e.getMessage(), e);
 				throw new DataAccessException(e.getMessage(), e);
+			} finally {
+				close(connection);
 			}
 		} else {
-			logger.error("There is no such item in database.");
-			throw new NoSuchElementException("There is no such item in database.");
+			logger.info("There is no item in database: " + id);
+			return false;
 		}
 	}
 
@@ -152,6 +150,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	public Item update(Item entity) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.UPDATE_ITEM)) {
+			connection.setAutoCommit(false);
 			int k = 1;
 			preparedStatement.setString(k++, entity.getCategory());
 			preparedStatement.setString(k++, entity.getName());
@@ -165,9 +164,11 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
 		return entity;
 	}
@@ -177,6 +178,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement =
 				     connection.prepareStatement(SQLQueries.Items.INSERT_ITEM)) {
+			connection.setAutoCommit(false);
 			int k = 1;
 			preparedStatement.setString(k++, entity.getCategory());
 			preparedStatement.setString(k++, entity.getName());
@@ -188,7 +190,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
 		}
@@ -198,12 +200,14 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			if (resultSet.next()) {
 				entity.setId(resultSet.getLong("id"));
 			}
-			insertImagesOfItemIntoDB(entity);
 			close(resultSet);
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
+		insertImagesOfItemIntoDB(entity);
 		return entity;
 	}
 
@@ -309,6 +313,7 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 	private void insertImagesOfItemIntoDB(Item item) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.INSERT_IMAGES)) {
+			connection.setAutoCommit(false);
 			if (item.getId() != null) {
 				deleteImages(item.getId());
 			}
@@ -319,30 +324,33 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 					preparedStatement.setLong(k++, item.getId());
 					preparedStatement.setString(k, url);
 					preparedStatement.execute();
-					connection.commit();
-					close(connection);
 				} else {
 					iterator.remove();
 				}
+				connection.commit();
 			}
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
 	}
 
 	private void deleteImages(Long id) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.DELETE_IMAGES)) {
+			connection.setAutoCommit(false);
 			preparedStatement.setLong(1, id);
 			preparedStatement.execute();
 			connection.commit();
-			connection.close();
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
 	}
 }

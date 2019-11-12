@@ -28,7 +28,11 @@
             </li>
         </ul>
     </div>
-    <div style="text-align: center;" id="alert"></div>
+    <div style="text-align: center;" id="alert">
+        <c:if test="${sessionScope.user != null and !sessionScope.user.verified}">
+            Your account is not verified. You can't save the order until you'll become verified!
+        </c:if>
+    </div>
     <c:choose>
         <c:when test="${sessionScope.user == null}">
             <div class="btn-group dropleft">

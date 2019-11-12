@@ -75,6 +75,17 @@ public class Order extends Entity {
 
     @Override
     public String toString() {
+        return "Order{" +
+                "user=" + user +
+                ", itemsAndQuantities=" + itemsAndQuantities +
+                ", deliveryType=" + deliveryType +
+                ", paymentType=" + paymentType +
+                ", status=" + status +
+                ", id=" + id +
+                '}';
+    }
+
+    public String toHtml() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Order id: ").append(id).append("<br>");
         stringBuilder.append("User: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("<br>");

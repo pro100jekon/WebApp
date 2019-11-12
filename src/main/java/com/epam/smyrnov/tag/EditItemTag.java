@@ -4,7 +4,6 @@ package com.epam.smyrnov.tag;
 import com.epam.smyrnov.entity.Entity;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.entity.order.Order;
-import com.epam.smyrnov.entity.user.User;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

@@ -19,7 +19,7 @@ public class EditOrderAction implements Action {
 		Order order = orderService.getOrderById(Long.parseLong(id));
 		if (order != null) {
 			session.setAttribute("order", order); // you can change only one order per session.
-			// Needed for validation of changes.
+													 // Needed for validation of changes.
 		}
 		if (session.getAttribute("itemMap") != null) {
 			session.removeAttribute("itemMap");

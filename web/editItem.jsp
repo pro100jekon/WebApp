@@ -8,6 +8,7 @@
             $('a[id^="i"]').on('click', function () {
                 var id = this.id;
                 $.get("editItemAjax", {ordinal: $("#input" + id).val()}, function (text) {
+                    var out = '<td colspan=\"2\"><div style=\"text-align: center;\"><p>'+ text + '</p></div></td>';
                     $("#alert").html(text);
                     $("#" + id).text("Removed");
                 });

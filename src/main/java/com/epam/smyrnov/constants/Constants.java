@@ -22,6 +22,7 @@ public class Constants {
         public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain connection.";
         public static final String ERR_CANNOT_CLOSE_RESULT_SET = "Cannot close result set.";
         public static final String ERR_CANNOT_CLOSE_CONNECTION = "Cannot close connection.";
+        public static final String ERR_CANNOT_CLOSE_STATEMENT = "Cannot close statement.";
         public static final String ERR_CANNOT_ROLLBACK_CONNECTION = "Cannot rollback connection.";
     }
 }

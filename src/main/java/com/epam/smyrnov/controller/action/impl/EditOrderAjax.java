@@ -33,9 +33,9 @@ public class EditOrderAjax implements Action {
 			if (item != null) {
 				itemMap.put(item, Integer.parseInt(quantity));
 			}
-			StringBuilder itemsOutput = new StringBuilder("<td colspan=\"2\"><div style=\"text-align: center;\">");
+			StringBuilder itemsOutput = new StringBuilder();
 			for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
-				itemsOutput.append("<h5>").append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append("</h5><br>");
+				itemsOutput.append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append(";");
 			}
 			itemsOutput.append("</div></td>");
 			return "ajaxOutput/" + itemsOutput;

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CrudRepository<T, ID> {
 
-    long count();
+    long getLastId();
 
     boolean delete(ID id);
 

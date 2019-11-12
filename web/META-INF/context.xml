@@ -6,7 +6,7 @@
 		maxTotal="100" maxIdle="30" maxWaitMillis="10000"
 		username="root" password="asdf"
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		defaultAutoCommit="false"
+		defaultAutoCommit="true"
 		defaultTransactionIsolation="READ_COMMITTED"
 		connectionProperties="useUnicode=yes;characterEncoding=utf8;"
 		url="jdbc:mysql://localhost/web_app"/>

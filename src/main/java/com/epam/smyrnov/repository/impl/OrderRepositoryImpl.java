@@ -29,10 +29,10 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 	private static final Logger logger = Logger.getLogger(ItemRepositoryImpl.class);
 
 	@Override
-	public long count() {
+	public long getLastId() {
 		long counter = 0;
 		try (Connection connection = getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.COUNT_ALL_ORDERS)) {
+		     PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.GET_LAST_ID)) {
 			preparedStatement.execute();
 			ResultSet resultSet = preparedStatement.getResultSet();
 			if (resultSet.next()) {
@@ -146,15 +146,17 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 	public Order update(Order entity) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.DELETE_ORDER_BY_ID)) {
+			connection.setAutoCommit(false);
 			preparedStatement.setLong(1, entity.getId());
 			preparedStatement.execute();
 			connection.commit();
-			close(connection);
 			return create(entity);
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -162,6 +164,7 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 	public Order create(Order entity) {
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Orders.INSERT_ORDER)) {
+			connection.setAutoCommit(false);
 			preparedStatement.setLong(1, entity.getId());
 			preparedStatement.setLong(4, entity.getUser().getId());
 			preparedStatement.setInt(5, entity.getDeliveryType().ordinal());
@@ -171,14 +174,16 @@ public class OrderRepositoryImpl extends AbstractRepository implements OrderRepo
 				preparedStatement.setLong(2, entry.getKey().getId());
 				preparedStatement.setInt(3, entry.getValue());
 				preparedStatement.execute();
-				connection.commit();
 			}
+			connection.commit();
 			close(connection);
 			return entity;
 		} catch (SQLException e) {
-			rollback(connection);
+			rollback(connection, e);
 			logger.error(e.getMessage(), e);
 			throw new DataAccessException(e.getMessage(), e);
+		} finally {
+			close(connection);
 		}
 	}
 

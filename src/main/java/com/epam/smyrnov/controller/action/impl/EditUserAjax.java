@@ -23,13 +23,6 @@ public class EditUserAjax implements Action {
 			System.out.println("block");
 			user = userService.blockUser(user);
 		}
-		StringBuilder outerInfo = new StringBuilder();
-		outerInfo.append("User id: ").append(user.getId()).append("<br>");
-		outerInfo.append("First name: ").append(user.getFirstName()).append("<br>");
-		outerInfo.append("Last name: ").append(user.getLastName()).append("<br>");
-		outerInfo.append("Email: ").append(user.getEmail()).append("<br>");
-		outerInfo.append("Blocked: ").append(user.isBlocked()).append("<br>");
-		outerInfo.append("Role: ").append(user.getRole().value()).append("<br>");
-		return "ajaxOutput/" + outerInfo.toString();
+		return "ajaxOutput/" + user.isBlocked();
 	}
 }

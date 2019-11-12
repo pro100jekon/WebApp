@@ -9,7 +9,7 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>
 <div class="container">
     <form class="px-4 py-3" action="registerAccount" method="post"
-          oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>
+          oninput='confirmPassword.setCustomValidity(confirmPassword.value !== password.value ? "Passwords do not match." : "")'>
         <div class="form-group">
             <label for="email">Email address</label>
             <input name="email" type="email" class="form-control" id="email"
@@ -48,10 +48,8 @@
 </div>
 <%@include file="WEB-INF/jspf/footer.jspf" %>
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
-
         window.addEventListener('load', function() {
             var forms = document.getElementsByClassName('needs-validation');
             var validation = Array.prototype.filter.call(forms, function(form) {

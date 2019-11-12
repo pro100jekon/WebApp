@@ -48,6 +48,6 @@ public class OrderServiceImpl implements OrderService, Serializable {
 
 	@Override
 	public Long getLastId() {
-		return orderRepository.count() + 1;
+		return orderRepository.getLastId() + 1;
 	}
 }

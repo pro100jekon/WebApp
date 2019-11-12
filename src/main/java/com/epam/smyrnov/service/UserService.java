@@ -19,9 +19,7 @@ public interface UserService {
 
     User updateUser(User user);
 
-   // boolean deleteUserById(Long id);
-
-   // boolean deleteUserByEmail(String email);
+    boolean verifyUser(String hash);
 
     User blockUser(User user);
 

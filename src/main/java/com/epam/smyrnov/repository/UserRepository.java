@@ -9,8 +9,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     boolean delete(Long id);
 
-    boolean deleteByEmail(String email);
-
     boolean existsById(Long id);
 
     boolean existsByEmail(String email);
@@ -28,4 +26,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User create(User entity);
 
     List<User> saveAll(List<User> entities);
+
+    boolean verifyUser(String hash);
 }

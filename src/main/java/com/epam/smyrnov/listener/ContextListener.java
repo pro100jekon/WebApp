@@ -9,6 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -17,11 +21,18 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        logger.debug("ContextListener was initialized.");
         ActionFactory.init();
         ServletContext servletContext = sce.getServletContext();
+        Properties properties = new Properties();
+        try {
+            properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        servletContext.setAttribute("properties", properties);
         ContextBeanLoader loader = new ContextBeanLoader(servletContext);
         loader.load("com.epam.smyrnov.repository", "com.epam.smyrnov.service");
+        logger.debug("ContextListener was initialized.");
     }
 
     @Override

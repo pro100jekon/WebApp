@@ -9,7 +9,8 @@
     <script>
         $(document).on("click", "#submitItem", function () {
             $.get("editOrderAjax", {itemId: $("#itemId").val(), quantity: $("#quantity").val()}, function (map) {
-                $("#existingItems").html(map);
+                var out = '<td colspan=\"2\"><div style="text-align: center;"><h5>' + map + '</h5></div></td>';
+                $("#existingItems").html(out);
             });
             return false;
         });

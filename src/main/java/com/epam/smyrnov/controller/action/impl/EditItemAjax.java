@@ -12,7 +12,7 @@ public class EditItemAjax implements Action {
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Item item = (Item) request.getSession().getAttribute("item");
 		if (item == null) {
-			request.setAttribute("error", "There is nothing to change");
+			request.setAttribute("message", "ERROR. There is nothing to change");
 		} else {
 			String ordinal = request.getParameter("ordinal");
 			int o = Integer.parseInt(ordinal);
@@ -20,6 +20,6 @@ public class EditItemAjax implements Action {
 			response.setCharacterEncoding("UTF-8");
 			item.getImageURLs().set(o, null);
 		}
-		return "ajaxOutput/<td colspan=\"2\"><div style=\"text-align: center;\"><p>Press Save button to confirm changes after all done actions</p></div></td>";
+		return "ajaxOutput/To confirm changes, you must press Save button.";
 	}
 }

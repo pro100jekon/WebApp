@@ -9,7 +9,7 @@
                     <div class="card mb-4 box-shadow">
                         <div class="card-body">
                             <p class="card-text">
-                                ${i}
+                                ${i.toHtml()}
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-capitalize"><a href="<ct:editItem  entity="${i}"/>${i.id}">Edit</a></small>

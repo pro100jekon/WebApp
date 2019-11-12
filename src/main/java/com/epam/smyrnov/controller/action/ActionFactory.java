@@ -14,7 +14,7 @@ public class ActionFactory {
 		container.put("GET/main",               new MainAction());
 		container.put("POST/login",             new SignInAction());
 		container.put("GET/register",           new SignUpAction());
-		container.put("POST/registerAccount",   new RegisterAccountAction());
+		container.put("POST/registerAccount",   new RegisterUserAction());
 		container.put("GET/account",            new AccountAction());
 		container.put("GET/exit",               new ExitAction());
 		container.put("GET/editOrder",          new EditOrderAction());
@@ -30,6 +30,7 @@ public class ActionFactory {
 		container.put("GET/showByCriteria",     new SortAction());
 		container.put("GET/deleteItemFromCart", new DeleteItemFromCartAction());
 		container.put("GET/deleteItem",         new DeleteItemAction());
+		container.put("GET/verify",             new VerifyAction());
 	}
 
 	public static Action getAction(HttpServletRequest request) {

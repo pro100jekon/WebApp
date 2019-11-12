@@ -13,6 +13,7 @@ public class User extends Entity {
     private String firstName;
     private String lastName;
     private boolean isBlocked;
+    private boolean isVerified;
     private Role role;
 
     public String getEmail() {
@@ -55,6 +56,14 @@ public class User extends Entity {
         isBlocked = blocked;
     }
 
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -69,28 +78,30 @@ public class User extends Entity {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return isBlocked == user.isBlocked &&
-                email.equals(user.email) &&
-                password.equals(user.password) &&
-                firstName.equals(user.firstName) &&
-                lastName.equals(user.lastName) &&
+                isVerified == user.isVerified &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
                 role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password, firstName, lastName, isBlocked, role);
+        return Objects.hash(email, password, firstName, lastName, isBlocked, isVerified, role);
     }
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("User id: ").append(id).append("<br>");
-        stringBuilder.append("Email: ").append(email).append("<br>");
-        stringBuilder.append("Password: ").append(password).append("<br>");
-        stringBuilder.append("First name: ").append(firstName).append("<br>");
-        stringBuilder.append("Last name: ").append(lastName).append("<br>");
-        stringBuilder.append("Blocked: ").append(isBlocked).append("<br>");
-        stringBuilder.append("Role: ").append(role.value()).append("<br>");
-        return stringBuilder.toString();
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isBlocked=" + isBlocked +
+                ", isVerified=" + isVerified +
+                ", role=" + role +
+                ", id=" + id +
+                '}';
     }
 }

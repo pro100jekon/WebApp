@@ -16,7 +16,13 @@ public class UserServiceImpl implements UserService, Serializable {
 
     private static final long serialVersionUID = 4568764135134687987L;
     @Autowired
-    public UserRepository repository;
+    private UserRepository repository;
+
+    public UserServiceImpl() {}
+
+    public UserServiceImpl(UserRepository repository){
+        this.repository = repository;
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -43,8 +49,7 @@ public class UserServiceImpl implements UserService, Serializable {
         User user = new User();
         user.setRole(Role.CLIENT);
         user.setEmail(email);
-        String hash = HashingSha256.hash(password);
-        user.setPassword(hash);
+        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return repository.create(user);
@@ -55,15 +60,10 @@ public class UserServiceImpl implements UserService, Serializable {
         return repository.update(user);
     }
 
-    /*@Override
-    public boolean deleteUserById(Long id) {
-        return repository.delete(id);
-    }
-
     @Override
-    public boolean deleteUserByEmail(String email) {
-        return repository.deleteByEmail(email);
-    }*/
+    public boolean verifyUser(String hash) {
+        return repository.verifyUser(hash);
+    }
 
     @Override
     public User blockUser(User user) {
