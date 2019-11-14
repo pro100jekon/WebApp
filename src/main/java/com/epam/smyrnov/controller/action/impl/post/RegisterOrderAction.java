@@ -1,7 +1,10 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.post;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.Page;
+import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.entity.Cart;
 import com.epam.smyrnov.entity.order.DeliveryType;
 import com.epam.smyrnov.entity.order.Order;
@@ -17,7 +20,7 @@ import java.io.IOException;
 
 public class RegisterOrderAction implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart != null) {
@@ -38,17 +41,17 @@ public class RegisterOrderAction implements Action {
 					orderService.addOrder(order);
 					session.removeAttribute("cart");
 					session.setAttribute("cart", new Cart());
-					request.setAttribute("message", "INFO. Order was successfully registered.");
-					return "PRG" + Constants.Pages.INFO_PAGE;
+					request.setAttribute("message", "mes.order.successfully.registered");
+					return new ActionResult(Constants.Pages.INFO_PAGE, ResponseType.REDIRECT);
 				} else {
-					request.setAttribute("message", "ERROR. Wrong params. Try again.");
+					request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.wrong.params"));
 				}
 			} else {
-				request.setAttribute("message", "ERROR. You are not logged in. Try again.");
+				request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.not.logged.in"));
 			}
 		} else {
-			request.setAttribute("message", "ERROR. There is no order to register");
+			request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.no.order.to.register"));
 		}
-		return Constants.Pages.INFO_PAGE;
+		return new ActionResult(Constants.Pages.INFO_PAGE);
 	}
 }

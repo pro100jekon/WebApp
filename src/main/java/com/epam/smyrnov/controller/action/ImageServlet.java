@@ -16,7 +16,6 @@ public class ImageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String img = req.getPathInfo().substring(1);
-		File file = new File(".");
 		BufferedImage bufferedImage = ImageIO.read(new File(getServletContext().getRealPath("/img") + "\\" + img));
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream);

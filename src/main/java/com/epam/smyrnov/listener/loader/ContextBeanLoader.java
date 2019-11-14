@@ -3,6 +3,8 @@ package com.epam.smyrnov.listener.loader;
 import com.epam.smyrnov.annotation.Autowired;
 import com.epam.smyrnov.annotation.Repository;
 import com.epam.smyrnov.annotation.Service;
+import com.epam.smyrnov.exception.StartupException;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import java.io.IOException;
@@ -13,12 +15,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Loads autowired repositories into the correct classes using java.lang.reflect.
+ */
 public class ContextBeanLoader extends AbstractContextBeanLoader {
 
     private Map<String, Object> beans = new HashMap<>();
     private Map<String, Object> services = new HashMap<>();
 
     private ServletContext servletContext;
+
+
+    private static Logger logger = Logger.getLogger(ContextBeanLoader.class);
 
     public ContextBeanLoader(ServletContext servletContext) {
         this.servletContext = servletContext;
@@ -46,7 +54,8 @@ public class ContextBeanLoader extends AbstractContextBeanLoader {
                 servletContext.setAttribute(entry.getKey(), o);
             }
         } catch (ReflectiveOperationException | IOException | URISyntaxException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new StartupException(e.getMessage(), e);
         }
     }
 

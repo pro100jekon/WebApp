@@ -1,7 +1,7 @@
 <%@ include file="WEB-INF/jspf/taglib.jspf" %>
 <html>
 <head>
-    <title>Info</title>
+    <title><fmt:message key="info"/></title>
     <%@ include file="WEB-INF/jspf/style.jspf" %>
 </head>
 <body>

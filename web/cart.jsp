@@ -3,7 +3,7 @@
 <%@ page import="com.epam.smyrnov.entity.order.PaymentType" %>
 <html>
 <head>
-    <title>Your cart</title>
+    <title><fmt:message key="cart"/></title>
     <%@ include file="WEB-INF/jspf/style.jspf" %>
 </head>
 <body>
@@ -28,7 +28,7 @@
                         </p>
                     </td>
                     <td>
-                        <a href="deleteItemFromCart?id=${item.key.id}">Delete</a>
+                        <a href="deleteItemFromCart?id=${item.key.id}"><fmt:message key="delete"/></a>
                     </td>
                 </tr>
                 <c:set value="${counter + 1}" var="counter"/>
@@ -42,14 +42,14 @@
             <c:when test="${user == null or cart.isEmpty() or !user.verified}">
                 <tr>
                     <td colspan="4"><input class="btn btn-primary btn-lg btn-block disabled" type="submit"
-                                           value="Save the order"></td>
+                                           value="Register order"></td>
                 </tr>
             </c:when>
             <c:otherwise>
                 <form action="registerOrder" method="post">
                     <tr>
                         <td>
-                            <label for="deliveryType">Delivery type</label>
+                            <label for="deliveryType"><fmt:message key="del.type"/></label>
                         </td>
                         <td colspan="4">
                             <select id="deliveryType" name="deliveryType" class="form-control">
@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="paymentType">Payment type</label>
+                            <label for="paymentType"><fmt:message key="pay.type"/></label>
                         </td>
                         <td colspan="4">
                             <select name="paymentType" id="paymentType" class="form-control">

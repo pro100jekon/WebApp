@@ -1,7 +1,7 @@
 <%@ include file="WEB-INF/jspf/taglib.jspf"%>
 <html>
 <head>
-    <title>Add item</title>
+    <title><fmt:message key="add.item"/></title>
     <%@include file="WEB-INF/jspf/style.jspf"%>
 </head>
 <body>
@@ -10,11 +10,11 @@
     <form action="saveItem" method="post">
         <table class="table table-bordered">
             <tr>
-                <td><p class="font-weight-bold"><label for="category">Category</label></p></td>
+                <td><p class="font-weight-bold"><label for="category"><fmt:message key="category"/></label></p></td>
                 <td><input class="form-control" id="category" name="category" required></td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="name">Name</label></p></td>
+                <td><p class="font-weight-bold"><label for="name"><fmt:message key="name"/></label></p></td>
                 <td><input class="form-control" id="name" name="name" required></td>
             </tr>
             <tr>
@@ -30,23 +30,23 @@
                 </td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="weight">Weight</label></p></td>
+                <td><p class="font-weight-bold"><label for="weight"><fmt:message key="weight"/></label></p></td>
                 <td><input class="form-control" id="weight" name="weight" type="number" required></td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="color">Color</label></p></td>
+                <td><p class="font-weight-bold"><label for="color"><fmt:message key="color"/></label></p></td>
                 <td><input class="form-control" id="color" name="color" required></td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="price">Price</label></p></td>
+                <td><p class="font-weight-bold"><label for="price"><fmt:message key="price"/></label></p></td>
                 <td><input class="form-control" id="price" name="price" type="number" required></td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="date">Date</label></p></td>
-                <td><input class="form-control" id="date" type="date" name="date" required</td>
+                <td><p class="font-weight-bold"><label for="date"><fmt:message key="date"/></label></p></td>
+                <td><input class="form-control" id="date" type="date" name="date" required></td>
             </tr>
             <tr>
-                <td><p class="font-weight-bold"><label for="imgPaths">IMG (delimiter is ;)</label></p></td>
+                <td><p class="font-weight-bold"><label for="imgPaths"><fmt:message key="img"/></label></p></td>
                 <td><input class="form-control" id="imgPaths" name="imgPaths" required></td>
             </tr>
         </table>

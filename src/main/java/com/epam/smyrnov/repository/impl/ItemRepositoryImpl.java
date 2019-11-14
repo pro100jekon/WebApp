@@ -160,9 +160,9 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 			preparedStatement.setBigDecimal(k++, entity.getPrice());
 			preparedStatement.setDate(k++, entity.getDate());
 			preparedStatement.setLong(k, entity.getId());
-			insertImagesOfItemIntoDB(entity);
 			preparedStatement.execute();
 			connection.commit();
+			insertImagesOfItemIntoDB(entity);
 		} catch (SQLException e) {
 			rollback(connection, e);
 			logger.error(e.getMessage(), e);
@@ -314,21 +314,13 @@ public class ItemRepositoryImpl extends AbstractRepository implements ItemReposi
 		Connection connection = getConnection();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SQLQueries.Items.INSERT_IMAGES)) {
 			connection.setAutoCommit(false);
-			if (item.getId() != null) {
-				deleteImages(item.getId());
+			deleteImages(item.getId());
+			for (String url : item.getImageURLs()) {
+				preparedStatement.setLong(1, item.getId());
+				preparedStatement.setString(2, url);
+				preparedStatement.execute();
 			}
-			for (Iterator<String> iterator = item.getImageURLs().iterator(); iterator.hasNext(); ) {
-				String url = iterator.next();
-				if (url != null) {
-					int k = 1;
-					preparedStatement.setLong(k++, item.getId());
-					preparedStatement.setString(k, url);
-					preparedStatement.execute();
-				} else {
-					iterator.remove();
-				}
-				connection.commit();
-			}
+			connection.commit();
 		} catch (SQLException e) {
 			rollback(connection, e);
 			logger.error(e.getMessage(), e);

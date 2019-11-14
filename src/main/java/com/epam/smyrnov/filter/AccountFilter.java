@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Doesn't let to access account page if not logged in.
+ */
 @WebFilter(urlPatterns = {"/account"})
 public class AccountFilter implements Filter {
 

@@ -1,6 +1,7 @@
 package com.epam.smyrnov.filter;
 
 import com.epam.smyrnov.constants.Constants;
+import com.epam.smyrnov.controller.action.Page;
 import com.epam.smyrnov.entity.user.Role;
 import com.epam.smyrnov.entity.user.User;
 import org.apache.log4j.Logger;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/items.jsp", "/users.jsp", "/orders.jsp", "/addItem.jsp", "/deleteItem.jsp", "/editOrder", "/editItem"})
+/**
+ * Only admin can access these pages.
+ */
+@WebFilter(urlPatterns = {"/items.jsp", "/users.jsp", "/orders.jsp", "/addItem.jsp", "/deleteItem.jsp", "/editOrder", "/editItem", "/saveItem", "/saveOrder"})
 public class AdminActionsFilter implements Filter {
 
 	private static final Logger logger = Logger.getLogger(AdminActionsFilter.class);
@@ -27,7 +31,7 @@ public class AdminActionsFilter implements Filter {
 		if (user != null && user.getRole().equals(Role.ADMIN)) {
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
-			servletRequest.setAttribute("message", "You don't have permissions to do that.");
+			servletRequest.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.no.permissions"));
 			servletRequest.getRequestDispatcher(Constants.Pages.INFO_PAGE).forward(servletRequest, servletResponse);
 		}
 	}

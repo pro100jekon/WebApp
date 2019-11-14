@@ -1,7 +1,7 @@
 <%@ include file="WEB-INF/jspf/taglib.jspf"%>
 <html>
 <head>
-    <title>Delete item</title>
+    <title><fmt:message key="delete.item"/></title>
     <%@include file="WEB-INF/jspf/style.jspf"%>
 </head>
 <body>
@@ -17,7 +17,7 @@
                     ${item.name}
                 </td>
                 <td>
-                    <a href="deleteItem?id=${item.id}">Delete</a>
+                    <a href="deleteItem?id=${item.id}"><fmt:message key="delete"/></a>
                 </td>
             </tr>
         </c:forEach>

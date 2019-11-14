@@ -3,7 +3,7 @@
 <html>
 <head>
     <%@include file="WEB-INF/jspf/style.jspf" %>
-    <title>Users</title>
+    <title><fmt:message key="users"/></title>
     <script>
         $(document).ready(function () {
             $('a[id^="user"]').on('click', function () {
@@ -28,7 +28,7 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Here are all registered users</h1>
+            <h1 class="jumbotron-heading"><fmt:message key="all.users"/></h1>
         </div>
     </section>
 
@@ -40,13 +40,13 @@
                         <div class="card mb-4 box-shadow">
                             <div class="card-body">
                                 <p class="card-text">
-                                    User id: ${i.id}<br>
-                                    First name: ${i.firstName}<br>
-                                    Last name: ${i.lastName}<br>
-                                    Email: ${i.email}<br>
-                                    Blocked: <a id="puser${i.id}">${i.blocked}</a><br>
-                                    Verified: ${i.verified}<br>
-                                    Role: ${i.role.value()}<br>
+                                    Id: ${i.id}<br>
+                                    <fmt:message key="f.name"/>: ${i.firstName}<br>
+                                    <fmt:message key="l.name"/>: ${i.lastName}<br>
+                                    <fmt:message key="email"/>: ${i.email}<br>
+                                    <fmt:message key="blocked"/>: <a id="puser${i.id}">${i.blocked}</a><br>
+                                    <fmt:message key="verified"/>: ${i.verified}<br>
+                                    <fmt:message key="role"/>: ${i.role.value()}<br>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <input type="hidden" id="inputuser${i.id}" value="${i.id}">

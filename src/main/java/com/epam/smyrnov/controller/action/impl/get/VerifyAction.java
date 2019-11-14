@@ -1,7 +1,9 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.get;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.Page;
 import com.epam.smyrnov.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +12,13 @@ import java.io.IOException;
 
 public class VerifyAction implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UserService userService = (UserService) request.getServletContext().getAttribute("UserService");
 		if (userService.verifyUser(request.getParameter("hash"))) {
-			request.setAttribute("message", "INFO. You were successfully verified. Now you can continue shopping!");
+			request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("mes.successfully.verified"));
 		} else {
-			request.setAttribute("message", "ERROR. This link is invalid or you are already verified.");
+			request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.invalid.link"));
 		}
-		return Constants.Pages.INFO_PAGE;
+		return new ActionResult(Constants.Pages.INFO_PAGE);
 	}
 }

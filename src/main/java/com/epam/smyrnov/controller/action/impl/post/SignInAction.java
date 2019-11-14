@@ -1,7 +1,10 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.post;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.Page;
+import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.entity.user.User;
 import com.epam.smyrnov.util.HashingSha256;
 import com.epam.smyrnov.service.UserService;
@@ -13,29 +16,28 @@ import javax.servlet.http.HttpSession;
 
 public class SignInAction implements Action {
     @Override
-    public String exec(HttpServletRequest request, HttpServletResponse response) {
+    public ActionResult exec(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) {
-            request.setAttribute("message", "ERROR. You are already logged in. Exit your account first, then try again.");
+            request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.logged.in"));
         } else {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             if (email == null || password == null) {
-                request.setAttribute("message", "ERROR. Email or password is incorrect.");
+                request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.invalid.email.and.password"));
             } else {
                 ServletContext servletContext = request.getServletContext();
                 UserService userService = (UserService) servletContext.getAttribute("UserService");
                 password = HashingSha256.hash(password);
                 User user = userService.getUserByEmail(email);
-                System.out.println(HashingSha256.hash("111111"));
                 if (user == null || !password.equals(user.getPassword())) {
-                    request.setAttribute("message", "ERROR. There is no user with such email and password.");
+                    request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.no.such.user"));
                 } else {
                     session.setAttribute("user", user);
-                    return "PRG" + Constants.Pages.MAIN_PAGE;
+                    return new ActionResult(Constants.Pages.MAIN_PAGE, ResponseType.REDIRECT);
                 }
             }
         }
-        return Constants.Pages.INFO_PAGE;
+        return new ActionResult(Constants.Pages.INFO_PAGE);
     }
 }

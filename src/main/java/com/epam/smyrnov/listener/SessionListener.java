@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+/**
+ * Sets the individual cart for each session.
+ */
 @WebListener
 public class SessionListener implements HttpSessionListener {
 

@@ -1,7 +1,9 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.post;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.entity.Cart;
 import com.epam.smyrnov.entity.Item;
 
@@ -12,7 +14,7 @@ import java.io.IOException;
 
 public class UpdateOrderAction implements Action {
     @Override
-    public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int[] quantities = null;
         int size;
         for (int i = 0; ; i++) {
@@ -45,6 +47,6 @@ public class UpdateOrderAction implements Action {
                 cart.getItemInCart().put(item, quantities[size++]);
             }
         }
-        return "PRG" + Constants.Pages.CART_PAGE;
+        return new ActionResult(Constants.Pages.CART_PAGE, ResponseType.REDIRECT);
     }
 }

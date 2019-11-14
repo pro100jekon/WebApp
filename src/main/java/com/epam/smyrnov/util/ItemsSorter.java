@@ -5,6 +5,9 @@ import com.epam.smyrnov.entity.Item;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Util class that sorts items by input criteria.
+ */
 public class ItemsSorter {
 
 	private ItemsSorter() {

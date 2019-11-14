@@ -18,7 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*")
+/**
+ * Checks whether the user is blocked or not.
+ */
+@WebFilter(urlPatterns = {"*"})
 public class IsBlockedFilter implements Filter {
 
 	private static final Logger logger = Logger.getLogger(IsBlockedFilter.class);

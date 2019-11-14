@@ -10,7 +10,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/main.jsp", "/main"})
+/**
+ * Resets the items
+ */
+@WebFilter(urlPatterns = {"/main", "/main.jsp"})
 public class MainPageFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {

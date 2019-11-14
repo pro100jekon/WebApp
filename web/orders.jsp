@@ -3,7 +3,7 @@
 <html>
 <head>
     <%@include file="WEB-INF/jspf/style.jspf"%>
-    <title>Orders</title>
+    <title><fmt:message key="orders"/></title>
     <c:set var="orders" value="${applicationScope.OrderService.allOrders}" scope="page"/>
 </head>
 <body>
@@ -11,7 +11,7 @@
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Here are all orders</h1>
+            <h1 class="jumbotron-heading"><fmt:message key="all.orders"/></h1>
         </div>
     </section>
     <l:adminElement element="${pageScope.orders}"/>

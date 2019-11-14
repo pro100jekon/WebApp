@@ -1,9 +1,10 @@
 <%@ include file="WEB-INF/jspf/taglib.jspf" %>
 <html>
 <title>
-    Welcome to the shop!
+    <fmt:message key="welcome"/>
 </title>
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <%@ include file="WEB-INF/jspf/style.jspf" %>
 </head>
 <body>
@@ -13,28 +14,28 @@
         <form action="showByCriteria">
             <c:set var="categories" value="${applicationScope.ItemService.allCategories}"/>
             <select name="category">
-                <option name="None" value="None">None</option>
+                <option name="None" value="None"><fmt:message key="none"/></option>
                 <c:forEach var="category" items="${categories}">
                     <option name="${category}" value="${category.toLowerCase()}">${category}</option>
                 </c:forEach>
             </select>
             <select name="sort">
-                <option name="None" value="None">None</option>
-                <option name="DateASC" value="DateASC">Date ASC</option>
-                <option name="DateDESC" value="DateDESC">Date DESC</option>
-                <option name="NameASC" value="NameASC">Name ASC</option>
-                <option name="NameDESC" value="NameDESC">Name DESC</option>
-                <option name="PriceASC" value="PriceASC">Price ASC</option>
-                <option name="PriceDESC" value="PriceDESC">Price DESC</option>
-                <option name="WeightASC" value="WeightASC">Weight ASC</option>
-                <option name="WeightDESC" value="WeightDESC">Weight DESC</option>
+                <option name="None" value="None"><fmt:message key="none"/></option>
+                <option name="DateASC" value="DateASC"><fmt:message key="date.asc"/></option>
+                <option name="DateDESC" value="DateDESC"><fmt:message key="date.desc"/></option>
+                <option name="NameASC" value="NameASC"><fmt:message key="name.asc"/></option>
+                <option name="NameDESC" value="NameDESC"><fmt:message key="name.desc"/></option>
+                <option name="PriceASC" value="PriceASC"><fmt:message key="price.asc"/></option>
+                <option name="PriceDESC" value="PriceDESC"><fmt:message key="price.desc"/></option>
+                <option name="WeightASC" value="WeightASC"><fmt:message key="weight.asc"/></option>
+                <option name="WeightDESC" value="WeightDESC"><fmt:message key="weight.desc"/></option>
             </select>
-            <label for="left">Price range</label>
+            <label for="left"><fmt:message key="price.range"/></label>
             <input id="left" name="left" value="${param.left}" type="number">
             <input id="right" name="right" value="${param.right}" type="number">
             <c:set var="colors" value="${ItemService.allColors}"/>
             <select name="color">
-                <option name="None" value="None">None</option>
+                <option name="None" value="None"><fmt:message key="none"/></option>
                 <c:forEach var="color" items="${colors}">
                     <option name="${color}" value="${color.toLowerCase()}">${color}</option>
                 </c:forEach>
@@ -75,26 +76,27 @@
                                 <a class="carousel-control-prev" href="#carousel${i.id}" role="button"
                                    data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
+                                    <span class="sr-only"><fmt:message key="prev"/></span>
                                 </a>
                                 <a class="carousel-control-next" href="#carousel${i.id}" role="button"
                                    data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
+                                    <span class="sr-only"><fmt:message key="next"/></span>
                                 </a>
                             </div>
                         </c:if>
                         <div class="card-body">
                             <p class="card-text">
                                     ${i.name}<br>
-                                Color: ${i.color}<br>
-                                Size: ${i.size}<br>
-                                Date: ${i.date}<br>
-                                Weight: ${i.weight}<br>
+                                <fmt:message key="color"/>: ${i.color}<br>
+                                <fmt:message key="size"/>: ${i.size}<br>
+                                <fmt:message key="date"/>: ${i.date}<br>
+                                <fmt:message key="weight"/>: ${i.weight}<br>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="text-capitalize">${i.price} UAH</h4>
-                                <a id="add${i.id}" href="#" class="btn btn-primary my-2">Add to cart</a>
+                                <a id="add${i.id}" href="#" class="btn btn-primary my-2">
+                                    <fmt:message key="add.to.cart"/></a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +113,7 @@
             $.get("addToCartAjax", {itemId: id}, function (text) {
                 var res = text.split('%');
                 $('#alert').text(res[0]);
-                $('#totalPrice').html(res[1]);
+                $('#totalPrice').html('<fmt:message key="cart"/>: ' + res[1] + ' UAH');
             });
             return false;
         });

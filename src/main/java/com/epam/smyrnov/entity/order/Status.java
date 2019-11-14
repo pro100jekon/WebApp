@@ -1,7 +1,11 @@
 package com.epam.smyrnov.entity.order;
 
+import com.epam.smyrnov.controller.action.Page;
+
 public enum Status {
-    REGISTERED("Registered"), CONFIRMED("Confirmed"), ON_ITS_WAY("On its way"), DELIVERED("Delivered"), PAID("Paid"), CANCELLED("Cancelled");
+    REGISTERED(Page.RESOURCE_BUNDLE.getString("registered")), CONFIRMED(Page.RESOURCE_BUNDLE.getString("confirmed")),
+    ON_ITS_WAY(Page.RESOURCE_BUNDLE.getString("on.its.way")), DELIVERED(Page.RESOURCE_BUNDLE.getString("delivered")),
+    PAID(Page.RESOURCE_BUNDLE.getString("paid")), CANCELLED(Page.RESOURCE_BUNDLE.getString("cancelled"));
 
     private String value;
 

@@ -1,10 +1,15 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.get.ajax;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.Page;
+import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.service.ItemService;
+import com.epam.smyrnov.service.OrderService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +19,7 @@ import java.util.Map;
 
 public class EditOrderAjax implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		Map<Item, Integer> itemMap = (Map<Item, Integer>) session.getAttribute("itemMap");
 		if (itemMap == null) {
@@ -26,7 +31,7 @@ public class EditOrderAjax implements Action {
 		String itemId = request.getParameter("itemId");
 		String quantity = request.getParameter("quantity");
 		if (itemId == null || quantity == null || Integer.parseInt(itemId) < 1 || Integer.parseInt(quantity) < 1) {
-			request.setAttribute("message", "ERROR. Wrong info. Try again.");
+			request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.wrong.info"));
 		} else {
 			ItemService itemService = (ItemService) request.getServletContext().getAttribute("ItemService");
 			Item item = itemService.getItemById(Long.parseLong(itemId));
@@ -35,11 +40,10 @@ public class EditOrderAjax implements Action {
 			}
 			StringBuilder itemsOutput = new StringBuilder();
 			for (Map.Entry<Item, Integer> entry : itemMap.entrySet()) {
-				itemsOutput.append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append(";");
+				itemsOutput.append(entry.getKey().getName()).append(" -> ").append(entry.getValue()).append("; ");
 			}
-			itemsOutput.append("</div></td>");
-			return "ajaxOutput/" + itemsOutput;
+			return new ActionResult(itemsOutput.toString(), ResponseType.AJAX);
 		}
-		return Constants.Pages.INFO_PAGE;
+		return new ActionResult(Constants.Pages.INFO_PAGE);
 	}
 }

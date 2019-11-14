@@ -1,7 +1,10 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.post;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
+import com.epam.smyrnov.controller.action.Page;
+import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.entity.order.DeliveryType;
 import com.epam.smyrnov.entity.order.Order;
@@ -11,6 +14,7 @@ import com.epam.smyrnov.entity.user.User;
 import com.epam.smyrnov.service.OrderService;
 import com.epam.smyrnov.service.UserService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +24,7 @@ import java.util.Map;
 
 public class SaveEditedOrderAction implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		OrderService orderService = (OrderService) request.getServletContext().getAttribute("OrderService");
 		UserService userService = (UserService) request.getServletContext().getAttribute("UserService");
 		HttpSession session = request.getSession();
@@ -54,7 +58,7 @@ public class SaveEditedOrderAction implements Action {
 			if (sessionOrder.getStatus().equals(Status.CANCELLED) ||
 					(sessionOrder.getStatus().equals(Status.CONFIRMED) && status.equals(Status.REGISTERED))) {
 				//cannot change cancelled orders AND cannot revert confirmed into registered
-				request.setAttribute("message", "ERROR. Invalid state of order status to be changed.");
+				request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.invalid.state.of.order"));
 			} else {
 				orderForSave.setStatus(status);
 				orderForSave.setDeliveryType(deliveryType);
@@ -65,11 +69,11 @@ public class SaveEditedOrderAction implements Action {
 				}
 				orderForSave.setItemsAndQuantities(itemMap);
 				orderService.updateOrder(orderForSave);
-				request.setAttribute("message", "INFO. Order was successfully edited.");
+				request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("mes.order.successfully.edited"));
 			}
 		} else {
-			request.setAttribute("message", "ERROR. There is no order to edit.");
+			request.setAttribute("message", Page.RESOURCE_BUNDLE.getString("err.no.order.to.edit"));
 		}
-		return "PRG" + Constants.Pages.INFO_PAGE;
+		return new ActionResult(Constants.Pages.INFO_PAGE, ResponseType.REDIRECT);
 	}
 }

@@ -1,7 +1,8 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.get;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
 import com.epam.smyrnov.entity.Cart;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.service.ItemService;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 public class DeleteItemFromCartAction implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
 		String id = request.getParameter("id");
@@ -23,6 +24,6 @@ public class DeleteItemFromCartAction implements Action {
 			Item item = itemService.getItemById(itemId);
 			cart.remove(item);
 		}
-		return Constants.Pages.CART_PAGE;
+		return new ActionResult(Constants.Pages.CART_PAGE);
 	}
 }

@@ -1,7 +1,8 @@
-package com.epam.smyrnov.controller.action.impl;
+package com.epam.smyrnov.controller.action.impl.get;
 
 import com.epam.smyrnov.constants.Constants;
 import com.epam.smyrnov.controller.action.Action;
+import com.epam.smyrnov.controller.action.ActionResult;
 import com.epam.smyrnov.entity.order.Order;
 import com.epam.smyrnov.service.OrderService;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 public class EditOrderAction implements Action {
 	@Override
-	public String exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ActionResult exec(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String id = request.getParameter("orderId");
 		HttpSession session = request.getSession();
 		OrderService orderService = ((OrderService) request.getServletContext().getAttribute("OrderService"));
@@ -24,6 +25,6 @@ public class EditOrderAction implements Action {
 		if (session.getAttribute("itemMap") != null) {
 			session.removeAttribute("itemMap");
 		}
-		return Constants.Pages.ORDER_EDITOR_PAGE;
+		return new ActionResult(Constants.Pages.ORDER_EDITOR_PAGE);
 	}
 }

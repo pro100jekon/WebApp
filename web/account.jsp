@@ -2,18 +2,18 @@
 <html>
 <head>
     <%@ include file="WEB-INF/jspf/style.jspf" %>
-    <title>Your account</title>
+    <title><fmt:message key="account"/></title>
 </head>
 <body>
 <%@ include file="WEB-INF/jspf/header.jspf" %>
 <div class="container">
     <p class="font-weight-bold"><h3>Your orders:</h3></p>
     <c:forEach var="order" items="${requestScope.orders}">
-        <h4>Order ${order.id}</h4>
+        <h4><fmt:message key="order"/> ${order.id}</h4>
         <table class="table">
             <tr>
                 <td>
-                    Payment type
+                    <fmt:message key="pay.type"/>
                 </td>
                 <td width="500">
                         ${order.paymentType.value()}
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <td>
-                    Delivery type
+                    <fmt:message key="del.type"/>
                 </td>
                 <td width="500">
                         ${order.deliveryType.value()}
@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td>
-                    Status
+                    <fmt:message key="status"/>
                 </td>
                 <td width="500">
                     <p class="font-italic">
@@ -43,7 +43,7 @@
                             ${item.key.name}
                     </td>
                     <td width="500">
-                            ${item.value} pcs
+                            ${item.value} <fmt:message key="pcs"/>
                     </td>
                 </tr>
             </c:forEach>
