@@ -33,5 +33,20 @@ public class UserServiceTest {
 		expectedUser.setFirstName("Ivan");
 		expectedUser.setLastName("Ivanov");
 		assertEquals(expectedUser, actualUser);
+		verify(userRepository).create(expectedUser);
+	}
+
+	@Test
+	public void testBlockUser() {
+		User expectedUser = new User();
+		expectedUser.setBlocked(true);
+		UserRepository userRepository = mock(UserRepository.class);
+		when(userRepository.update(expectedUser)).thenReturn(expectedUser);
+
+		UserService userService = new UserServiceImpl(userRepository);
+		User actualUser = new User();
+		userService.blockUser(actualUser);
+		assertEquals(expectedUser, actualUser);
+		verify(userRepository).update(expectedUser);
 	}
 }

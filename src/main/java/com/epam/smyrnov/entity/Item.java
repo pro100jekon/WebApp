@@ -87,13 +87,13 @@ public class Item extends Entity {
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
         return weight == item.weight &&
-                category.equals(item.category) &&
-                name.equals(item.name) &&
-                price.equals(item.price) &&
-                date.equals(item.date) &&
-                size.equals(item.size) &&
-                color.equals(item.color) &&
-                imageURLs.equals(item.imageURLs);
+                Objects.equals(category, item.category) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(price, item.price) &&
+                Objects.equals(date, item.date) &&
+                Objects.equals(size, item.size) &&
+                Objects.equals(color, item.color) &&
+                Objects.equals(imageURLs, item.imageURLs);
     }
 
     @Override
