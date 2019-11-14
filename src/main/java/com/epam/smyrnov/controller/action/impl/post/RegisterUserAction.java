@@ -6,9 +6,8 @@ import com.epam.smyrnov.controller.action.ActionResult;
 import com.epam.smyrnov.controller.action.Page;
 import com.epam.smyrnov.controller.action.ResponseType;
 import com.epam.smyrnov.mail.EmailVerification;
-import com.epam.smyrnov.util.HashingSha256;
 import com.epam.smyrnov.service.UserService;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.epam.smyrnov.util.HashingSha256;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

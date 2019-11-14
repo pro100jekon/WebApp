@@ -17,9 +17,14 @@ public class SessionListener implements HttpSessionListener {
 	private static final Logger logger = Logger.getLogger(SessionListener.class);
 
 	@Override
-	public void sessionCreated(HttpSessionEvent se) {
+	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
 		logger.debug("Session created");
-		HttpSession session = se.getSession();
+		HttpSession session = httpSessionEvent.getSession();
 		session.setAttribute("cart", new Cart());
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+		logger.debug("Session destroyed.");
 	}
 }

@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService, Serializable {
 	@Override
 	public List<Order> addOrders(List<Order> orders) {
 		return orderRepository.saveAll(orders);
-	}//TODO delete if not needed
+	}
 
 	@Override
 	public Order updateOrder(Order order) {
@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService, Serializable {
 	}
 
 	@Override
-	public Long getLastId() {
+	public Long setNewLastId() {
 		return orderRepository.getLastId() + 1;
 	}
 }

@@ -31,7 +31,7 @@ public class RegisterOrderAction implements Action {
 				String paymentType = request.getParameter("paymentType");
 				if (deliveryType != null && paymentType != null) {
 					Order order = new Order();
-					Long id = orderService.getLastId();
+					Long id = orderService.setNewLastId();
 					order.setId(id);
 					order.setUser(user);
 					order.setDeliveryType(DeliveryType.values()[Integer.parseInt(deliveryType)]);

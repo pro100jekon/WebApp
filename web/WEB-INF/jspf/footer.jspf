@@ -2,6 +2,6 @@
     <div class="container">
         <span class="text-muted">EPAM Summary Task Summer 2019. All rights and all lefts reserved.</span>
         <a href="changeLocale?language=en">English</a>
-        <a href="changeLocale?language=ru">Русский</a>
+        <a href="changeLocale?language=ru">Russian</a>
     </div>
 </footer>

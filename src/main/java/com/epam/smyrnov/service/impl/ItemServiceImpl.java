@@ -4,18 +4,11 @@ import com.epam.smyrnov.annotation.Autowired;
 import com.epam.smyrnov.annotation.Service;
 import com.epam.smyrnov.entity.Item;
 import com.epam.smyrnov.repository.ItemRepository;
-import com.epam.smyrnov.repository.impl.ItemRepositoryImpl;
 import com.epam.smyrnov.service.ItemService;
-import com.epam.smyrnov.constants.SQLQueries;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 @Service
 public class ItemServiceImpl implements ItemService, Serializable {

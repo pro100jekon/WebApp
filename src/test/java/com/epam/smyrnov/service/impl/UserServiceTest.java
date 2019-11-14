@@ -24,7 +24,8 @@ public class UserServiceTest {
 		when(userRepository.create(user)).thenReturn(user);
 
 		UserService userService = new UserServiceImpl(userRepository);
-		User actualUser = userService.addUser("Ivan", "Ivanov", "1@mail.com", "password");
+		User actualUser =
+				userService.addUser("Ivan", "Ivanov", "1@mail.com", HashingSha256.hash("password"));
 		User expectedUser = new User();
 		expectedUser.setEmail("1@mail.com");
 		expectedUser.setPassword(HashingSha256.hash("password"));

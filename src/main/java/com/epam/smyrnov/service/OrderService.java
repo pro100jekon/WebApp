@@ -19,5 +19,5 @@ public interface OrderService {
 
 	Order updateOrder(Order order);
 
-	Long getLastId();
+	Long setNewLastId();
 }

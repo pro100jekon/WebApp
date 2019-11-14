@@ -15,7 +15,7 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    User addUser(String firstName, String lastName, String email, String password); //TODO change parameters if needed
+    User addUser(String firstName, String lastName, String email, String hashedPassword);
 
     User updateUser(User user);
 

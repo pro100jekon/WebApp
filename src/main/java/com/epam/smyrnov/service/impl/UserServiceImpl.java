@@ -45,11 +45,11 @@ public class UserServiceImpl implements UserService, Serializable {
     }
 
     @Override
-    public User addUser(String firstName, String lastName, String email, String password) {
+    public User addUser(String firstName, String lastName, String email, String hashedPassword) {
         User user = new User();
         user.setRole(Role.CLIENT);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(hashedPassword);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return repository.create(user);
