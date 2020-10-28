@@ -4,7 +4,7 @@
 ================================================
 1. Open ``Application.java`` class. Open this window by right mouse button and select ``Create 'Application'``.
     
-    ![Image1](/images/1.jpg)
+    ![Image1](./images/1.jpg)
 1. Enter this command into ``VM options`` input field: ``-Dspring.profiles.active=local``.
 1. Copy this content
     ````
@@ -12,5 +12,5 @@
     ````
     and paste it to ``Environmental variables`` input field.
     
-    ![Image2](/images/2.jpg)
+    ![Image2](./images/2.jpg)
 1. Press ``Apply`` and ``OK``. Now you are able to launch stub locally.
