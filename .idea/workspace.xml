@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="25701bc8-f05c-49d4-92d7-04745401caf3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleImage.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.annotation.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.ejb.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.jms.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.persistence.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.resource.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.servlet.jsp.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javax.transaction.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/dbcreate.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/annotation/Autowired.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/annotation/Repository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/annotation/Service.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/constants/Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/constants/SQLQueries.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/Action.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/ActionFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/ActionResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/ImageServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/Page.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/ResponseType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/ErrorAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/AccountAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ChangeLocaleAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/DeleteItemFromCartAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/EditItemAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/EditOrderAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ExitAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/MainPageAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ShowByCriteriaAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/SignUpAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/VerifyAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ajax/AddToCartAjax.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ajax/EditItemAjax.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ajax/EditOrderAjax.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/get/ajax/EditUserAjax.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/DeleteItemAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/RegisterOrderAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/RegisterUserAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/SaveEditedOrderAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/SaveItemAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/SignInAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/controller/action/impl/post/UpdateOrderAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/Cart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/order/DeliveryType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/order/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/order/PaymentType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/order/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/user/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/entity/user/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/exception/DataAccessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/exception/StartupException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/AccountFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/AdminActionsFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/EncodingFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/IsBlockedFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/LocaleFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/filter/MainPageFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/listener/ContextListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/listener/SessionListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/listener/loader/AbstractContextBeanLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/listener/loader/ContextBeanLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/mail/EmailVerification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/mail/SmtpAuthenticator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/CrudRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/ItemRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/impl/AbstractRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/impl/ItemRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/impl/OrderRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/repository/impl/UserRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/ItemService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/OrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/impl/ItemServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/impl/OrderServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/tag/EditItemTag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/util/HashingSha256.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/util/ItemsSorter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/epam/smyrnov/util/ValidateItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locale.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locale_en.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locale_ru.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/epam/smyrnov/service/impl/ItemServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/epam/smyrnov/service/impl/UserServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/META-INF/context.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/jspf/footer.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/jspf/header.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/jspf/style.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/jspf/taglib.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/tag/editItem.tld" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/tags/adminElement.tag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/account.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/addItem.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/cart.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/deleteItem.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/editItem.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/editOrder.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/ASUSNotebook1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/ASUSNotebook2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/ASUSNotebook3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Huawei1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Huawei2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Huawei3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/LenovoNotebook1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/LenovoNotebook2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/LenovoNotebook3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/MinibotGyro1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/MinibotGyro2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Samsung1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Samsung2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/Samsung3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/SmartBalanceGyro1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/SmartBalanceGyro2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/SmartBalanceGyro3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiGyro1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiGyro2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiGyro3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiNotebook1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiNotebook2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/XiaomiNotebook3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/iPhone1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/iPhone2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/iPhone3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/info.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/items.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/main.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/orders.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/register.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/users.jsp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1yYHV3NiHZ9AhLrEcRf6OswFtWW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25701bc8-f05c-49d4-92d7-04745401caf3" name="Changes" comment="" />
+      <created>1632421626768</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632421626768</updated>
+      <workItem from="1632421629687" duration="33000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
