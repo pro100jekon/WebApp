@@ -1,7 +1,7 @@
-package com.epam.smyrnov;
+package com.epam.smyrnov.items.controller;
 
-import com.epam.smyrnov.model.Item;
-import com.epam.smyrnov.repository.ItemRepository;
+import com.epam.smyrnov.items.model.Item;
+import com.epam.smyrnov.items.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("items")
-public class TestController {
+public class ItemsController {
 
     @Autowired
     ItemRepository repository;

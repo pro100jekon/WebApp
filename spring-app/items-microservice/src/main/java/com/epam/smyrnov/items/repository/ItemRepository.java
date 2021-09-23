@@ -1,6 +1,6 @@
-package com.epam.smyrnov.repository;
+package com.epam.smyrnov.items.repository;
 
-import com.epam.smyrnov.model.Item;
+import com.epam.smyrnov.items.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.epam.smyrnov.model;
+package com.epam.smyrnov.items.model;
 
 import java.math.BigDecimal;
 import java.sql.Date;
