@@ -1,1 +1,24 @@
-GET http://localhost:8080/items/1
+GET http://localhost:8080/items
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "category": "smartphone",
+  "name": "some name",
+  "price": 12345,
+  "dateOfAddition": "2021-01-01",
+  "size": "10 x 10 x 10",
+  "color": "black",
+  "weight": 122
+}
+
+###
+PATCH http://localhost:8080/items/10
+Content-Type: application/json
+
+{
+  "name": "name2"
+}
