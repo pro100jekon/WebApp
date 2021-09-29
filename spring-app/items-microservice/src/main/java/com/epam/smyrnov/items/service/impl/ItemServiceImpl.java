@@ -3,9 +3,8 @@ package com.epam.smyrnov.items.service.impl;
 import com.epam.smyrnov.items.mapper.ItemMapper;
 import com.epam.smyrnov.items.model.dto.request.ItemRequest;
 import com.epam.smyrnov.items.model.dto.response.ItemResponse;
-import com.epam.smyrnov.items.repository.DatabaseItemRepository;
+import com.epam.smyrnov.items.repository.ItemsRepository;
 import com.epam.smyrnov.items.service.ItemService;
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    private final DatabaseItemRepository repository;
+    private final ItemsRepository repository;
     private final ItemMapper mapper;
 
     @Override
     public List<ItemResponse> getAll() {
-        return mapper.mapToResponse(
-                Lists.newArrayList(repository.findAll()));
+        return mapper.mapToResponse(repository.findAll());
     }
 
     @Override
@@ -46,26 +44,24 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemResponse get(Long id) {
         return mapper.mapToResponse(
-                repository.findById(id).orElseThrow());
+                repository.findById(id));
     }
 
     @Override
     public ItemResponse add(ItemRequest item) {
         return mapper.mapToResponse(
-                repository.save(
+                repository.add(
                         mapper.mapToEntity(item)));
     }
 
     @Override
     public ItemResponse update(Long id, ItemRequest item) {
         return mapper.mapToResponse(
-                repository.save(
-                        mapper.mapToEntity(
-                                item, repository.findById(id).orElseThrow())));
+                repository.update(id, mapper.mapToEntity(item)));
     }
 
     @Override
     public void remove(Long id) {
-        repository.deleteById(id);
+        repository.delete(id);
     }
 }

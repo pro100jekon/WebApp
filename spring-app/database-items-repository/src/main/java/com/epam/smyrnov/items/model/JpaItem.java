@@ -1,4 +1,4 @@
-package com.epam.smyrnov.items.model.dto.jpa;
+package com.epam.smyrnov.items.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.Objects;
 @Entity(name = "items")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class JpaItem implements Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -43,7 +43,7 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Item item = (Item) o;
+        JpaItem item = (JpaItem) o;
         return Objects.equals(id, item.id);
     }
 
@@ -52,3 +52,4 @@ public class Item {
         return id.hashCode();
     }
 }
+

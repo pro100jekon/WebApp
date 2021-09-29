@@ -1,24 +1,32 @@
 package com.epam.smyrnov.items.mapper;
 
-import com.epam.smyrnov.items.model.dto.jpa.Item;
+import com.epam.smyrnov.items.factory.ItemFactory;
+import com.epam.smyrnov.items.model.Item;
 import com.epam.smyrnov.items.model.dto.request.ItemRequest;
 import com.epam.smyrnov.items.model.dto.response.ItemResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
-public interface ItemMapper {
+public abstract class ItemMapper {
 
-    ItemResponse mapToResponse(Item item);
+    @Autowired
+    private ItemFactory itemFactory;
 
-    Item mapToEntity(ItemRequest request);
+    public abstract ItemResponse mapToResponse(Item item);
 
-    Item mapToEntity(ItemRequest request, @MappingTarget Item item);
+    public abstract Item mapToEntity(ItemRequest request);
 
-    List<ItemResponse> mapToResponse(List<Item> item);
+    public abstract List<ItemResponse> mapToResponse(List<? extends Item> item);
+
+    @ObjectFactory
+    public Item createItem() {
+        return itemFactory.createItem();
+    }
 }
