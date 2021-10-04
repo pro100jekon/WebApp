@@ -1,6 +1,6 @@
 package com.epam.smyrnov.items.mapper;
 
-import com.epam.smyrnov.items.factory.ItemFactory;
+import com.epam.smyrnov.items.model.factory.ItemFactory;
 import com.epam.smyrnov.items.model.Item;
 import com.epam.smyrnov.items.model.dto.request.ItemRequest;
 import com.epam.smyrnov.items.model.dto.response.ItemResponse;
@@ -27,6 +27,6 @@ public abstract class ItemMapper {
 
     @ObjectFactory
     public Item createItem() {
-        return itemFactory.createItem();
+        return itemFactory.create();
     }
 }

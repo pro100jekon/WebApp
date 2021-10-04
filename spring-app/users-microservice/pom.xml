@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>items-microservice</artifactId>
+  <artifactId>users-microservice</artifactId>
   <packaging>jar</packaging>
 
   <dependencyManagement>
@@ -27,7 +27,7 @@
   <dependencies>
     <dependency>
       <groupId>com.epam.smyrnov</groupId>
-      <artifactId>items-repository-db</artifactId>
+      <artifactId>users-repository-db</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
