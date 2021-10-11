@@ -28,13 +28,13 @@ public class JpaUser implements User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String email;
-    String passwordHash;
-    String passwordSalt;
+//    String passwordHash;
+//    String passwordSalt;
     String firstName;
     String lastName;
-    Boolean blocked;
+//    Boolean blocked;
     Boolean verified;
-    Role role;
+//    Role role;
 
     public static User empty() {
         return new JpaUser();

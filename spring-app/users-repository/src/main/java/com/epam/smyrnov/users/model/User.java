@@ -10,13 +10,13 @@ public interface User {
 
     void setEmail(String email);
 
-    String getPasswordHash();
-
-    void setPasswordHash(String passwordHash);
-
-    String getPasswordSalt();
-
-    void setPasswordSalt(String passwordSalt);
+//    String getPasswordHash();
+//
+//    void setPasswordHash(String passwordHash);
+//
+//    String getPasswordSalt();
+//
+//    void setPasswordSalt(String passwordSalt);
 
     String getFirstName();
 
@@ -26,15 +26,15 @@ public interface User {
 
     void setLastName(String lastName);
 
-    Boolean getBlocked();
-
-    void setBlocked(Boolean blocked);
+//    Boolean getBlocked();
+//
+//    void setBlocked(Boolean blocked);
 
     Boolean getVerified();
 
     void setVerified(Boolean verified);
 
-    Role getRole();
-
-    void setRole(Role role);
+//    Role getRole();
+//
+//    void setRole(Role role);
 }
