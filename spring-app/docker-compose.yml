@@ -1,0 +1,23 @@
+version: "2"
+services:
+  eureka:
+    container_name: eureka
+    build:
+      context: eureka
+    image: eureka:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - services-network
+  orders-ms:
+    container_name: orders-ms
+    build:
+      context: orders-microservice
+    image: orders-ms:latest
+    ports:
+      - "8089:8080"
+    networks:
+      - services-network
+networks:
+  services-network:
+    driver: bridge
