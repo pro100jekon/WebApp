@@ -1,9 +1,9 @@
 package com.epam.smyrnov.items.mapper;
 
-import com.epam.smyrnov.items.model.factory.ItemFactory;
 import com.epam.smyrnov.items.model.Item;
 import com.epam.smyrnov.items.model.dto.request.ItemRequest;
 import com.epam.smyrnov.items.model.dto.response.ItemResponse;
+import com.epam.smyrnov.items.model.factory.ItemFactory;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ObjectFactory;

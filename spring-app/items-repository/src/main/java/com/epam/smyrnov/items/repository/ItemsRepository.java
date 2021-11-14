@@ -5,21 +5,21 @@ import com.epam.smyrnov.items.model.Item;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ItemsRepository {
+public interface ItemsRepository<I extends Item> {
 
-    Item add(Item item);
+    I add(I item);
 
-    Item findById(Long id);
+    I findById(Long id);
 
-    List<Item> findAll();
+    List<? extends I> findAll();
 
-    Item update(Long id, Item item);
+    I update(Long id, I item);
 
     void delete(Long id);
 
-    List<? extends Item> findAllByCategory(String category);
+    List<? extends I> findAllByCategory(String category);
 
-    List<? extends Item> findAllByColor(String color);
+    List<? extends I> findAllByColor(String color);
 
-    List<? extends Item> findAllByPriceBetween(BigDecimal left, BigDecimal right);
+    List<? extends I> findAllByPriceBetween(BigDecimal left, BigDecimal right);
 }

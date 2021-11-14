@@ -4,17 +4,17 @@ import com.epam.smyrnov.users.model.User;
 
 import java.util.List;
 
-public interface UsersRepository {
+public interface UsersRepository<U extends User> {
 
-    User add(User user);
+    U add(U user);
 
-    User findById(Long id);
+    U findById(Long id);
 
-    User findByEmail(String email);
+    U findByEmail(String email);
 
-    List<User> findAll();
+    List<? extends U> findAll();
 
-    User update(Long id, User user);
+    U update(Long id, U user);
 
     void delete(Long id);
 }

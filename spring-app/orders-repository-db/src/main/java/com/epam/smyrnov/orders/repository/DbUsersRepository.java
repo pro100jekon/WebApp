@@ -2,7 +2,6 @@ package com.epam.smyrnov.orders.repository;
 
 import com.epam.smyrnov.orders.mapper.InternalOrdersMapper;
 import com.epam.smyrnov.orders.model.JpaOrder;
-import com.epam.smyrnov.orders.model.Order;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -11,37 +10,37 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class DbUsersRepository implements OrdersRepository {
+public class DbUsersRepository implements OrdersRepository<JpaOrder> {
 
     private final SpringOrdersRepository repository;
     private final InternalOrdersMapper mapper;
 
     @Override
-    public Order add(Order order) {
-        return repository.save((JpaOrder) order);
+    public JpaOrder add(JpaOrder order) {
+        return repository.save(order);
     }
 
     @Override
-    public Order findById(Long id) {
+    public JpaOrder findById(Long id) {
         return repository.findById(id).orElseThrow();
     }
 
     @Override
-    public Order update(Long orderId, Order order) {
+    public JpaOrder update(Long orderId, JpaOrder order) {
         return repository.save(
                 mapper.map(
-                        (JpaOrder) order,
+                        order,
                         repository.findById(orderId).orElseThrow()));
     }
 
     @Override
-    public List<Order> findAll() {
+    public List<JpaOrder> findAll() {
         return Lists.newArrayList(
                 repository.findAll());
     }
 
     @Override
-    public List<Order> findAllByUserId(Long userId) {
+    public List<JpaOrder> findAllByUserId(Long userId) {
         return Lists.newArrayList(
                 repository.findAllByUserId(userId));
     }

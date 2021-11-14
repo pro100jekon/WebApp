@@ -1,7 +1,6 @@
 package com.epam.smyrnov.orders.mapper;
 
 import com.epam.smyrnov.orders.model.Order;
-import com.epam.smyrnov.orders.model.OrderedItem;
 import com.epam.smyrnov.orders.model.dto.request.OrderRequest;
 import com.epam.smyrnov.orders.model.dto.response.OrderResponse;
 import com.epam.smyrnov.orders.model.factory.OrderFactory;
