@@ -10,16 +10,11 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -36,15 +31,14 @@ import java.util.Objects;
 public class JpaOrderedItem implements OrderedItem {
 
     @Id
-    @JoinColumn(table = "orders", name = "order_id", referencedColumnName = "id")
     @Column(name = "order_id", updatable = false, insertable = false)
     Long orderId;
     @Id
-    @Column(name = "item_id", insertable = false, updatable = false)
     Long itemId;
     BigDecimal price;
     Integer quantity;
     @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     JpaOrder order;
 
     @Override

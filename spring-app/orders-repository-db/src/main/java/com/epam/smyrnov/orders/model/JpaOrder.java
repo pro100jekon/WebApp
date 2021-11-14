@@ -38,7 +38,7 @@ public class JpaOrder implements Order {
     @Column(name = "user_id")
     Long userId;
     Status status;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     @ToString.Exclude
     Set<JpaOrderedItem> orderedItems;
 
