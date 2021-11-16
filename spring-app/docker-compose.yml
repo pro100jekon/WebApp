@@ -5,8 +5,9 @@ services:
     build:
       context: eureka
     image: eureka:latest
+    hostname: eureka.docker
     ports:
-      - "8761:8761"
+      - "8762:8761"
     networks:
       - services-network
   orders-ms:
@@ -18,6 +19,21 @@ services:
       - "8089:8080"
     networks:
       - services-network
+    environment:
+      EUREKA_URL: http://eureka.docker:8761/eureka
+      DB_HOST: orders-db.docker
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: test
+  orders-db:
+    image: mysql:8.0.26
+    hostname: orders-db.docker
+    ports:
+      - "3307:3306"
+    networks:
+      - services-network
+    environment:
+      MYSQL_ROOT_PASSWORD: test
 networks:
   services-network:
     driver: bridge

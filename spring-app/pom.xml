@@ -18,7 +18,8 @@
 		<module>orders-microservice</module>
 		<module>orders-repository</module>
 		<module>orders-repository-db</module>
-	</modules>
+		<module>eureka</module>
+    </modules>
 	<packaging>pom</packaging>
 	<groupId>com.epam.smyrnov</groupId>
 	<artifactId>webapp-root</artifactId>
