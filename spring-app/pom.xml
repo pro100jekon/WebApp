@@ -17,6 +17,7 @@
 		<module>users-repository-db</module>
 		<module>orders-microservice</module>
 		<module>orders-repository</module>
+		<module>config-server</module>
 		<module>orders-repository-db</module>
 		<module>eureka</module>
     </modules>

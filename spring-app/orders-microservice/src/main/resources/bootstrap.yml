@@ -1,12 +1,21 @@
 server:
-  port: 8083
+  port: 8080
 
 spring:
   application:
     name: orders-ms
   cloud:
     config:
-      enabled: false
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: ${CONFIG_SERVER_ID:config-server}
+      retry:
+        initial-interval: 2500
+        max-attempts: 10
+        max-interval: 7000
+        multiplier: 1.5
+      fail-fast: true
     discovery:
       enabled: true
 

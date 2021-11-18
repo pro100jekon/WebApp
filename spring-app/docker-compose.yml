@@ -1,19 +1,40 @@
 version: "2"
 services:
+
+
   eureka:
     container_name: eureka
     build:
-      context: eureka
+      context: ./eureka
     image: eureka:latest
     hostname: eureka.docker
     ports:
       - "8762:8761"
     networks:
       - services-network
+
+
+  config-server:
+    container_name: config-server
+    build:
+      context: ./
+      dockerfile: ./config-server/Dockerfile
+    image: config-server:latest
+    hostname: config-server.docker
+    ports:
+      - "8889:8888"
+    networks:
+      - services-network
+    environment:
+      EUREKA_URL: http://eureka.docker:8761/eureka
+      CONFIG_SERVER_KEYSTORE_PASSWORD: ${CONFIG_KEYSTORE_PASSWORD}
+
+
   orders-ms:
     container_name: orders-ms
     build:
-      context: orders-microservice
+      context: ./
+      dockerfile: ./orders-microservice/Dockerfile
     image: orders-ms:latest
     ports:
       - "8089:8080"
@@ -24,8 +45,10 @@ services:
       DB_HOST: orders-db.docker
       DB_PORT: 3306
       DB_USERNAME: root
-      DB_PASSWORD: test
+
+
   orders-db:
+    container_name: orders-db
     image: mysql:8.0.26
     hostname: orders-db.docker
     ports:
@@ -33,7 +56,9 @@ services:
     networks:
       - services-network
     environment:
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+
 networks:
   services-network:
     driver: bridge
