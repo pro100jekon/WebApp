@@ -6,7 +6,7 @@ services:
     container_name: eureka
     build:
       context: ./eureka
-    image: eureka:latest
+    image: eureka
     hostname: eureka.docker
     ports:
       - "8762:8761"
@@ -19,7 +19,7 @@ services:
     build:
       context: ./
       dockerfile: ./config-server/Dockerfile
-    image: config-server:latest
+    image: config-server
     hostname: config-server.docker
     ports:
       - "8889:8888"
@@ -35,7 +35,7 @@ services:
     build:
       context: ./
       dockerfile: ./orders-microservice/Dockerfile
-    image: orders-ms:latest
+    image: orders-ms
     ports:
       - "8089:8080"
     networks:
@@ -47,12 +47,53 @@ services:
       DB_USERNAME: root
 
 
+  items-ms:
+    container_name: items-ms
+    build:
+      context: ./
+      dockerfile: ./items-microservice/Dockerfile
+    image: items-ms
+    ports:
+      - "8088:8080"
+    networks:
+      - services-network
+    environment:
+      EUREKA_URL: http://eureka.docker:8761/eureka
+      DB_HOST: items-db.docker
+      DB_PORT: 3306
+      DB_USERNAME: root
+
+
   orders-db:
     container_name: orders-db
     image: mysql:8.0.26
     hostname: orders-db.docker
     ports:
       - "3307:3306"
+    networks:
+      - services-network
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+
+  items-db:
+    container_name: items-db
+    image: mysql:8.0.26
+    hostname: items-db.docker
+    ports:
+      - "3308:3306"
+    networks:
+      - services-network
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+
+  users-db:
+    container_name: users-db
+    image: mysql:8.0.26
+    hostname: users-db.docker
+    ports:
+      - "3309:3306"
     networks:
       - services-network
     environment:
