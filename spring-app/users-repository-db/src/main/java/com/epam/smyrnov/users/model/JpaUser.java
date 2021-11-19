@@ -28,17 +28,18 @@ public class JpaUser implements User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String email;
-//    String passwordHash;
+    //    String passwordHash;
 //    String passwordSalt;
     String firstName;
     String lastName;
-//    Boolean blocked;
+    //    Boolean blocked;
     Boolean verified;
 //    Role role;
 
     public static User empty() {
         return new JpaUser();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

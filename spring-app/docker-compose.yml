@@ -30,19 +30,19 @@ services:
       CONFIG_SERVER_KEYSTORE_PASSWORD: ${CONFIG_KEYSTORE_PASSWORD}
 
 
-  orders-ms:
-    container_name: orders-ms
+  users-ms:
+    container_name: users-ms
     build:
       context: ./
-      dockerfile: ./orders-microservice/Dockerfile
-    image: orders-ms
+      dockerfile: ./users-microservice/Dockerfile
+    image: users-ms
     ports:
-      - "8089:8080"
+      - "8087:8080"
     networks:
       - services-network
     environment:
       EUREKA_URL: http://eureka.docker:8761/eureka
-      DB_HOST: orders-db.docker
+      DB_HOST: users-db.docker
       DB_PORT: 3306
       DB_USERNAME: root
 
@@ -60,6 +60,23 @@ services:
     environment:
       EUREKA_URL: http://eureka.docker:8761/eureka
       DB_HOST: items-db.docker
+      DB_PORT: 3306
+      DB_USERNAME: root
+
+
+  orders-ms:
+    container_name: orders-ms
+    build:
+      context: ./
+      dockerfile: ./orders-microservice/Dockerfile
+    image: orders-ms
+    ports:
+      - "8089:8080"
+    networks:
+      - services-network
+    environment:
+      EUREKA_URL: http://eureka.docker:8761/eureka
+      DB_HOST: orders-db.docker
       DB_PORT: 3306
       DB_USERNAME: root
 
