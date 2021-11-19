@@ -7,7 +7,6 @@ RUN mkdir -p /root/.ssh
 ADD id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-RUN export PRIVATE_KEY=$( cat /root/.ssh/id_rsa )
 
 CMD mkdir app
 WORKDIR app
