@@ -1,6 +1,7 @@
 package com.epam.smyrnov.users.service.impl;
 
 import com.epam.smyrnov.users.mapper.UserMapper;
+import com.epam.smyrnov.users.model.User;
 import com.epam.smyrnov.users.model.dto.request.UserRequest;
 import com.epam.smyrnov.users.model.dto.response.UserResponse;
 import com.epam.smyrnov.users.repository.UsersRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
-    private final UsersRepository repository;
+    private final UsersRepository<? extends User> repository;
     private final UserMapper mapper;
 
     @Override

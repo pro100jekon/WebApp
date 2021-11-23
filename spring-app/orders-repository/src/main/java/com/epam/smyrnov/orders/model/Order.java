@@ -1,6 +1,6 @@
 package com.epam.smyrnov.orders.model;
 
-import java.util.Set;
+import java.util.List;
 
 public interface Order {
 
@@ -8,13 +8,17 @@ public interface Order {
 
     void setId(Long id);
 
-    Set<? extends OrderedItem> getOrderedItems();
+    List<? extends OrderedItem> getOrderedItems();
 
-    void setOrderedItems(Set<? extends OrderedItem> orderedItems);
+    void setOrderedItems(List<? extends OrderedItem> orderedItems);
 
     Long getUserId();
 
     void setUserId(Long userId);
+
+    UserSummary getUserSummary();
+
+    void setUserSummary(UserSummary userSummary);
 
     Status getStatus();
 

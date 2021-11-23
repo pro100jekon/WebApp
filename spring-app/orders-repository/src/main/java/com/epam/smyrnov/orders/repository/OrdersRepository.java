@@ -10,7 +10,7 @@ public interface OrdersRepository<O extends Order> {
 
     O findById(Long id);
 
-    O update(Long orderId, O order);
+    O update(Long orderId, Order order);
 
     List<? extends O> findAll();
 

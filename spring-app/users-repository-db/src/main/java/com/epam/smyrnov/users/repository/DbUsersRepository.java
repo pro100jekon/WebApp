@@ -2,6 +2,7 @@ package com.epam.smyrnov.users.repository;
 
 import com.epam.smyrnov.users.mapper.InternalUsersMapper;
 import com.epam.smyrnov.users.model.JpaUser;
+import com.epam.smyrnov.users.model.User;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,8 @@ public class DbUsersRepository implements UsersRepository<JpaUser> {
     private final InternalUsersMapper mapper;
 
     @Override
-    public JpaUser add(JpaUser user) {
-        return repository.save(user);
+    public JpaUser add(User user) {
+        return repository.save((JpaUser) user);
     }
 
     @Override
@@ -37,9 +38,9 @@ public class DbUsersRepository implements UsersRepository<JpaUser> {
     }
 
     @Override
-    public JpaUser update(Long id, JpaUser user) {
+    public JpaUser update(Long id, User user) {
         return repository.save(
-                mapper.map(user, findById(id)));
+                mapper.map((JpaUser) user, findById(id)));
     }
 
     @Override

@@ -6,6 +6,9 @@
 - Docker
 - Spring config (with encryption)
 - Eureka discovery
+- Feign Client
+- MapStruct
+- Spring HATEOAS
 
 ### Why splitting by functionality but not layers?
 

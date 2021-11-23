@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,12 +35,16 @@ public class JpaOrderedItem implements OrderedItem {
     @Column(name = "order_id", updatable = false, insertable = false)
     Long orderId;
     @Id
+    @Column(name = "item_id", updatable = false, insertable = false)
     Long itemId;
     BigDecimal price;
     Integer quantity;
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     JpaOrder order;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id", referencedColumnName = "item_id")
+    JpaItemSummary itemSummary;
 
     @Override
     public boolean equals(Object o) {
@@ -52,5 +57,10 @@ public class JpaOrderedItem implements OrderedItem {
     @Override
     public int hashCode() {
         return Objects.hash(orderId, itemId);
+    }
+
+    @Override
+    public void setItemSummary(ItemSummary itemSummary) {
+        this.itemSummary = (JpaItemSummary) itemSummary;
     }
 }
