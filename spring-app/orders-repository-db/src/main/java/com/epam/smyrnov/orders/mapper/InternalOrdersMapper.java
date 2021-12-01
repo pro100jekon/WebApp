@@ -1,5 +1,6 @@
 package com.epam.smyrnov.orders.mapper;
 
+import com.epam.smyrnov.orders.model.JpaItemSummary;
 import com.epam.smyrnov.orders.model.JpaOrder;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface InternalOrdersMapper {
 
     JpaOrder map(JpaOrder source, @MappingTarget JpaOrder target);
+
+    JpaItemSummary map(JpaItemSummary source, @MappingTarget JpaItemSummary target);
 }

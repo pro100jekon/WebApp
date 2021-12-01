@@ -5,6 +5,7 @@ import com.epam.smyrnov.orders.model.JpaOrder;
 import com.epam.smyrnov.orders.model.Order;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class DbOrdersRepository implements OrdersRepository<JpaOrder> {
     private final InternalOrdersMapper mapper;
 
     @Override
-    public JpaOrder add(JpaOrder order) {
-        return repository.save(order);
+    public JpaOrder add(Order order) {
+        return repository.save((JpaOrder) order);
     }
 
     @Override
@@ -37,7 +38,12 @@ public class DbOrdersRepository implements OrdersRepository<JpaOrder> {
     @Override
     public List<JpaOrder> findAll() {
         return Lists.newArrayList(
-                repository.findAll());
+                repository.findAll(PageRequest.ofSize(20)));
+    }
+
+    @Override
+    public List<? extends JpaOrder> findAll(Integer page) {
+        return repository.findAll(PageRequest.of(page, 20));
     }
 
     @Override

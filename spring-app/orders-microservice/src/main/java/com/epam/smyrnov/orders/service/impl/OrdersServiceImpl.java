@@ -8,10 +8,15 @@ import com.epam.smyrnov.orders.model.Order;
 import com.epam.smyrnov.orders.model.OrderedItem;
 import com.epam.smyrnov.orders.model.dto.request.OrderRequest;
 import com.epam.smyrnov.orders.model.dto.response.OrderResponse;
+import com.epam.smyrnov.orders.model.kafka.Item;
+import com.epam.smyrnov.orders.repository.ItemSummaryRepository;
 import com.epam.smyrnov.orders.repository.OrdersRepository;
 import com.epam.smyrnov.orders.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.lang.Nullable;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +28,20 @@ import java.util.stream.Collectors;
 public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository<? extends Order> repository;
+    private final ItemSummaryRepository<? extends ItemSummary> itemSummaryRepository;
     private final UsersClient usersClient;
     private final ItemsClient itemsClient;
     private final OrderMapper mapper;
 
     @Override
-    public List<OrderResponse> getAll() {
-        val orders = repository.findAll().stream()
+    public List<OrderResponse> getAll(@Nullable Integer page) {
+        List<? extends Order> orders;
+        if (page == null) {
+            orders = repository.findAll();
+        } else {
+            orders = repository.findAll(page - 1);
+        }
+        orders = orders.stream()
                 .map(this::fetchDataIfNecessary)
                 .collect(Collectors.toList());
         return mapper.mapToResponse(orders);
@@ -52,6 +64,15 @@ public class OrdersServiceImpl implements OrdersService {
     public OrderResponse update(Long id, OrderRequest order) {
         return mapper.mapToResponse(
                 repository.update(id, mapper.mapToEntity(order)));
+    }
+
+    @KafkaListener(id = "orders-listener", topics = "items-db-test")
+    public void listen(@Payload Item updatedItemInfo) {
+        itemSummaryRepository.update(
+                Long.parseLong(updatedItemInfo.getId()),
+                mapper.mapKafkaObject(updatedItemInfo));
+        // todo logger
+        System.out.println("Updated item summary" + updatedItemInfo);
     }
 
     private Order fetchDataIfNecessary(Order order) {

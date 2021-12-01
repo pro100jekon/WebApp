@@ -11,6 +11,7 @@ import com.epam.smyrnov.orders.model.dto.response.UserResponse;
 import com.epam.smyrnov.orders.model.entity.response.ItemEntityResponse;
 import com.epam.smyrnov.orders.model.entity.response.UserEntityResponse;
 import com.epam.smyrnov.orders.model.factory.OrderFactory;
+import com.epam.smyrnov.orders.model.kafka.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -35,6 +36,8 @@ public abstract class OrderMapper {
     }
 
     abstract Order map(OrderRequest request);
+
+    public abstract ItemSummary mapKafkaObject(Item kafkaItem);
 
     public abstract List<OrderResponse> mapToResponse(List<? extends Order> orders);
 
