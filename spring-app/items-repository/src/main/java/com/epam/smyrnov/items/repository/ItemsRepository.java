@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ItemsRepository<I extends Item> {
 
-    I add(I item);
+    I add(Item item);
 
     I findById(Long id);
 
     List<? extends I> findAll();
 
-    I update(Long id, I item);
+    I update(Long id, Item item);
 
     void delete(Long id);
 

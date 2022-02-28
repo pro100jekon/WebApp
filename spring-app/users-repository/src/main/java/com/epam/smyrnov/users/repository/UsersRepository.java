@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UsersRepository<U extends User> {
 
-    U add(U user);
+    U add(User user);
 
     U findById(Long id);
 
@@ -14,7 +14,7 @@ public interface UsersRepository<U extends User> {
 
     List<? extends U> findAll();
 
-    U update(Long id, U user);
+    U update(Long id, User user);
 
     void delete(Long id);
 }

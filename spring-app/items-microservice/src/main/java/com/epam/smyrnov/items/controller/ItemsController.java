@@ -4,6 +4,7 @@ import com.epam.smyrnov.items.model.dto.request.ItemRequest;
 import com.epam.smyrnov.items.model.dto.response.ItemResponse;
 import com.epam.smyrnov.items.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +22,7 @@ import java.util.List;
 public class ItemsController {
 
     private final ItemService service;
+    private final KafkaTemplate<String, Object> template;
 
     @GetMapping
     public List<ItemResponse> getAll() {
@@ -44,6 +46,8 @@ public class ItemsController {
 
     @PatchMapping("{id}")
     public ItemResponse partialUpdate(@PathVariable Long id, @RequestBody ItemRequest item) {
-        return service.update(id, item);
+        var result = service.update(id, item);
+        template.send("items-db-test", result);
+        return result;
     }
 }

@@ -6,13 +6,15 @@ import java.util.List;
 
 public interface OrdersRepository<O extends Order> {
 
-    O add(O order);
+    O add(Order order);
 
     O findById(Long id);
 
-    O update(Long orderId, O order);
+    O update(Long orderId, Order order);
 
     List<? extends O> findAll();
+
+    List<? extends O> findAll(Integer page);
 
     List<? extends O> findAllByUserId(Long userId);
 }

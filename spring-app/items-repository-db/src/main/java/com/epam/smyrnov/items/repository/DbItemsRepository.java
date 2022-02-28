@@ -1,6 +1,7 @@
 package com.epam.smyrnov.items.repository;
 
 import com.epam.smyrnov.items.mapper.InternalItemsMapper;
+import com.epam.smyrnov.items.model.Item;
 import com.epam.smyrnov.items.model.JpaItem;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class DbItemsRepository implements ItemsRepository<JpaItem> {
     private final InternalItemsMapper mapper;
 
     @Override
-    public JpaItem add(JpaItem item) {
-        return repository.save(item);
+    public JpaItem add(Item item) {
+        return repository.save((JpaItem) item);
     }
 
     @Override
@@ -33,9 +34,9 @@ public class DbItemsRepository implements ItemsRepository<JpaItem> {
     }
 
     @Override
-    public JpaItem update(Long id, JpaItem item) {
+    public JpaItem update(Long id, Item item) {
         return repository.save(
-                mapper.map(item, findById(id)));
+                mapper.map((JpaItem) item, findById(id)));
     }
 
     @Override

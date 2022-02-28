@@ -1,3 +1,10 @@
 spring:
   jackson:
     default-property-inclusion: non_null
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: "[::1]:9092"
+      client-id: items-ms-producer
+      properties:
+        spring.json.type.mapping: "item:com.epam.smyrnov.items.model.dto.response.ItemResponse"

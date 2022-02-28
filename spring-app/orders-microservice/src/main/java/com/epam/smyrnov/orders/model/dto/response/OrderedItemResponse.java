@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 public class OrderedItemResponse {
 
     String itemId;
+    String name;
     BigDecimal price;
     Integer quantity;
 }

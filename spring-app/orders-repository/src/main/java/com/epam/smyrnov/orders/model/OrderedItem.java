@@ -15,4 +15,8 @@ public interface OrderedItem {
     Integer getQuantity();
 
     void setQuantity(Integer quantity);
+
+    ItemSummary getItemSummary();
+
+    void setItemSummary(ItemSummary itemSummary);
 }
