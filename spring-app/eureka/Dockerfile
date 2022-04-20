@@ -1,4 +1,4 @@
-FROM openjdk:16-alpine
+FROM adoptopenjdk/openjdk11:latest
 
 ARG JAR_PATH=target/*.jar
 COPY ${JAR_PATH} ./app.jar

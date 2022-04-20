@@ -33,6 +33,6 @@ build/
 .vscode/
 
 .env
-id_rsa
+id_*
 .run/**
 .jpb/**

@@ -9,10 +9,9 @@ spring:
       server:
         git:
           uri: git@github.com:pro100jekon/config-server.git
-          host-key-algorithm: ssh-rsa
-          host-key: AAAAB3NzaC1yc2EAAAADAQABAAACAQC2NvYjrnzyrK2fBAYZfObd2gJk6uvnxlESRHvYi5saSiGgl1rBT6gk1/cj19UONcs82ys5atn7RARRP7Iqofd9n6hD+Gj2w4q1YZpkkmixV9QJUFLPX7+LF3G79sCdDHyNJ2f8Y4uXjKDNU4EWw2u/PtMSCmdGeox/g84f+MJm0md6leqfWw125ZIVUe+idaLkxQ2JBCpdLwzgTei66QLdZdWWZwWgGLhet/1lwj+t/29Pnq8Qj1NhUkij7IS+jnWO4n2wgfF2PBaf6xwRSKvya3dWY3muMWglniyP2DN7mb9OwUwhRjjFWDl5saCQZpWnOO1SstZsmEjf2X48/o6D6EMVVV3AAdqzwDJ9UpsaxA6mjjPxLs47Mxs6KhUB1jqjMJ6cHsLLrNL1IJpP8l+kylwOISFDrg5yVgRMWjHXrvOldTg+xuXmKC8GMcN8yOHVXEia4mV1YlWIDYzMkYvDjF/9d0U0c5fAlceWfNgF4NxQbB271jnXFxhBCD5q/tu8DHJAJnuBDA0U02DuL5c8YobIPneHt46S/CWsKC5dJy0WqiB6QkXPf+SV7N2tae+cu/6u8hZ1h2AKBiTYVlCFDuKuhIhrkC7r5v6m1ATWQ6+9cHeIIA22JP4Immc+8X7fEj6I9WvEFHt+bFROkK2+3xKCmj54wveo9vvWZHRaiw==
           default-label: main
-          strict-host-key-checking: false
+          passphrase: ${PASSPHRASE}
+          known-hosts-file: ${KNOWN_HOSTS}
         enabled: true
 
 encrypt:
