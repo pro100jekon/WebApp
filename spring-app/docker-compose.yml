@@ -2,146 +2,61 @@ version: "2"
 services:
 
 
-  eureka:
-    container_name: eureka
+  eureka_1:
+    container_name: eureka1
     build:
-      context: ./eureka
+      context: eureka
     image: eureka
-    hostname: eureka.docker
+    hostname: eureka1.docker
     ports:
       - "8762:8761"
     networks:
       - services-network
+    environment:
+      PEERING_URL: http://eureka2.docker:8761
+      HOSTNAME: host.docker.internal
+      URL: "http://host.docker.internal:8762"
+      PORT: 8762
+      VIRTUAL_HOSTNAME: "http://host.docker.internal:8762"
 
-
-  config-server:
-    container_name: config-server
+  eureka_2:
+    container_name: eureka2
     build:
-      context: ./
-      dockerfile: ./config-server/Dockerfile
-    image: config-server
-    hostname: config-server.docker
+      context: eureka
+    image: eureka
+    hostname: eureka2.docker
     ports:
-      - "8889:8888"
+      - "8763:8761"
     networks:
       - services-network
     environment:
-      PASSPHRASE: ${PASSPHRASE}
-      KNOWN_HOSTS: /root/.ssh/known_hosts
-      EUREKA_URL: http://eureka.docker:8761/eureka
-      CONFIG_SERVER_KEYSTORE_PASSWORD: ${CONFIG_KEYSTORE_PASSWORD}
+      PEERING_URL: http://eureka1.docker:8761
+      HOSTNAME: host.docker.internal
+      PORT: 8763
+      URL: "http://host.docker.internal:8763"
+      VIRTUAL_HOSTNAME: "http://host.docker.internal:8763"
 
-
-  users-ms:
-    container_name: users-ms
+  spring-boot:
+    container_name: spring-boot
     build:
-      context: ./
-      dockerfile: ./users-microservice/Dockerfile
-    image: users-ms
+      context: spring-appp
+    image: spring-boot
     ports:
-      - "8087:8080"
+      - "8080:8080"
     networks:
       - services-network
     environment:
-      EUREKA_URL: http://eureka.docker:8761/eureka
-      DB_HOST: users-db.docker
-      DB_PORT: 3306
-      DB_USERNAME: root
+      EUREKA_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
 
-
-  items-ms:
-    container_name: items-ms
+  standalone:
+    container_name: standalone
     build:
-      context: ./
-      dockerfile: ./items-microservice/Dockerfile
-    image: items-ms
+      context: standalone
+    image: standalone
     ports:
-      - "8088:8080"
+      - "8081:8080"
     networks:
       - services-network
-    environment:
-      EUREKA_URL: http://eureka.docker:8761/eureka
-      DB_HOST: items-db.docker
-      DB_PORT: 3306
-      DB_USERNAME: root
-
-
-  orders-ms:
-    container_name: orders-ms
-    build:
-      context: ./
-      dockerfile: ./orders-microservice/Dockerfile
-    image: orders-ms
-    ports:
-      - "8089:8080"
-    networks:
-      - services-network
-    environment:
-      EUREKA_URL: http://eureka.docker:8761/eureka
-      DB_HOST: orders-db.docker
-      DB_PORT: 3306
-      DB_USERNAME: root
-
-
-  orders-db:
-    container_name: orders-db
-    image: mysql:8.0.26
-    hostname: orders-db.docker
-    ports:
-      - "3307:3306"
-    networks:
-      - services-network
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-
-
-  items-db:
-    container_name: items-db
-    image: mysql:8.0.26
-    hostname: items-db.docker
-    ports:
-      - "3308:3306"
-    networks:
-      - services-network
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-
-
-  users-db:
-    container_name: users-db
-    image: mysql:8.0.26
-    hostname: users-db.docker
-    ports:
-      - "3309:3306"
-    networks:
-      - services-network
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-
-  zookeeper:
-    container_name: zookeeper
-    image: confluentinc/cp-zookeeper:7.0.1
-    networks:
-      - services-network
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-
-  broker:
-    container_name: kafka
-    image: confluentinc/cp-kafka:7.0.1
-    ports:
-      - "9092:9092"
-    networks:
-      - services-network
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
 networks:
   services-network:

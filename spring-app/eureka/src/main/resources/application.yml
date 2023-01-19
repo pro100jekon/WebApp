@@ -1,6 +1,11 @@
 server:
   port: 8761
 eureka:
+  instance:
+    hostname: ${HOSTNAME}
+    prefer-ip-address: true
+    virtual-host-name: ${VIRTUAL_HOSTNAME}
+    status-page-url: ${URL}
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    service-url:
+      defaultZone: ${PEERING_URL}/eureka

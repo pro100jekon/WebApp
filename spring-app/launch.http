@@ -1,4 +1,4 @@
-GET http://localhost:8088/items
+GET http://localhost:8080/orders
 
 ###
 
@@ -16,16 +16,21 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:8081/items/10
+PATCH http://localhost:8081/items/1
 Content-Type: application/json
 
 {
-  "name": "name2"
+  "name": "Samsung Galaxy S9"
 }
 
 ###
 GET http://localhost:8082/users
 
 ###
-GET http://localhost:8089/orders
+GET http://localhost:8080/orders?page=1
 
+###
+GET http://localhost:8081/items
+
+###
+GET http://localhost:8081/actuator/env

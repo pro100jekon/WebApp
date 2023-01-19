@@ -9,18 +9,9 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <modules>
-    <module>items-microservice</module>
-    <module>items-repository</module>
-    <module>items-repository-db</module>
-    <module>users-microservice</module>
-    <module>users-repository</module>
-    <module>users-repository-db</module>
-    <module>orders-microservice</module>
-    <module>orders-repository</module>
-    <module>config-server</module>
-    <module>orders-repository-db</module>
     <module>eureka</module>
-    <module>microservice-parent</module>
+    <module>spring-appp</module>
+    <module>standalone</module>
   </modules>
   <packaging>pom</packaging>
   <groupId>com.epam.smyrnov</groupId>
