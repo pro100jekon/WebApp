@@ -13,7 +13,7 @@ services:
     networks:
       - services-network
     environment:
-      PEERING_URL: http://eureka2.docker:8761
+      PEERING_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
       HOSTNAME: host.docker.internal
       URL: "http://host.docker.internal:8762"
       PORT: 8762
@@ -30,14 +30,14 @@ services:
     networks:
       - services-network
     environment:
-      PEERING_URL: http://eureka1.docker:8761
+      PEERING_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
       HOSTNAME: host.docker.internal
       PORT: 8763
       URL: "http://host.docker.internal:8763"
       VIRTUAL_HOSTNAME: "http://host.docker.internal:8763"
 
-  spring-boot:
-    container_name: spring-boot
+  spring-boot1:
+    container_name: spring-boot1
     build:
       context: spring-appp
     image: spring-boot
@@ -47,16 +47,50 @@ services:
       - services-network
     environment:
       EUREKA_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
+      EUREKA: eureka1.docker:8761
+      APPNAME: springboot1
 
-  standalone:
-    container_name: standalone
+  spring-boot2:
+    container_name: spring-boot2
     build:
-      context: standalone
-    image: standalone
+      context: spring-appp
+    image: spring-boot
     ports:
       - "8081:8080"
     networks:
       - services-network
+    environment:
+      EUREKA_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
+      EUREKA: eureka1.docker:8761
+      APPNAME: springboot2
+
+  spring-boot3:
+    container_name: spring-boot3
+    build:
+      context: spring-appp
+    image: spring-boot
+    ports:
+      - "8082:8080"
+    networks:
+      - services-network
+    environment:
+      EUREKA_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
+      EUREKA: eureka1.docker:8761
+      APPNAME: springboot3
+
+  spring-boot4:
+    container_name: spring-boot4
+    build:
+      context: spring-appp
+    image: spring-boot
+    ports:
+      - "8083:8080"
+    networks:
+      - services-network
+    environment:
+      EUREKA_URL: http://eureka1.docker:8761/eureka,http://eureka2.docker:8761/eureka
+      EUREKA: eureka1.docker:8761
+      APPNAME: springboot4
 
 networks:
   services-network:

@@ -8,4 +8,7 @@ eureka:
     status-page-url: ${URL}
   client:
     service-url:
-      defaultZone: ${PEERING_URL}/eureka
+      defaultZone: ${PEERING_URL:http://localhost:8761/eureka}
+    register-with-eureka: false
+  server:
+    enable-self-preservation: false
