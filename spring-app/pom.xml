@@ -10,7 +10,7 @@
   </parent>
   <modules>
     <module>eureka</module>
-    <module>spring-appp</module>
+    <module>springbootapp</module>
     <module>standalone</module>
   </modules>
   <packaging>pom</packaging>
